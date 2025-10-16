@@ -65,7 +65,7 @@
         /* Hero Section */
         .hero {
             height: 100vh;
-            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect fill="%234a4a4a" width="1200" height="800"/><circle cx="300" cy="400" r="150" fill="%23666" opacity="0.3"/><circle cx="900" cy="400" r="200" fill="%23777" opacity="0.2"/></svg>');
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1602874801006-27071fab8c4d?w=1600&q=80');
             background-size: cover;
             background-position: center;
             display: flex;
@@ -178,22 +178,11 @@
         .product-img {
             width: 100%;
             height: 350px;
-            background: #e5e5e5;
             margin-bottom: 20px;
             position: relative;
             overflow: hidden;
-        }
-
-        .product-img::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 60%;
-            height: 80%;
-            background: radial-gradient(circle, #8b7355 0%, transparent 70%);
-            opacity: 0.3;
+            background-size: cover;
+            background-position: center;
         }
 
         .product-name {
@@ -237,11 +226,12 @@
         }
 
         .gift-img {
-            background: #d4c5b9;
             height: 100%;
             min-height: 250px;
             position: relative;
             overflow: hidden;
+            background-size: cover;
+            background-position: center;
         }
 
         .gift-img:first-child {
@@ -258,10 +248,11 @@
 
         .category-card {
             height: 400px;
-            background: #2c2c2c;
             position: relative;
             overflow: hidden;
             cursor: pointer;
+            background-size: cover;
+            background-position: center;
         }
 
         .category-card::before {
@@ -270,6 +261,11 @@
             inset: 0;
             background: linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.8));
             z-index: 1;
+            transition: background 0.3s;
+        }
+
+        .category-card:hover::before {
+            background: linear-gradient(to bottom, transparent 30%, rgba(0,0,0,0.9));
         }
 
         .category-card h3 {
@@ -313,7 +309,8 @@
         }
 
         .craftsman-img {
-            background: #8b7355;
+            background-size: cover;
+            background-position: center;
             position: relative;
         }
 
@@ -325,7 +322,8 @@
         }
 
         .stores-img {
-            background: #d4c5b9;
+            background-size: cover;
+            background-position: center;
         }
 
         .stores-content {
@@ -372,8 +370,9 @@
 
         .news-img {
             height: 300px;
-            background: #4a4a4a;
             margin-bottom: 20px;
+            background-size: cover;
+            background-position: center;
         }
 
         .news-card h3 {
@@ -526,17 +525,17 @@
         
         <div class="product-grid">
             <div class="product-card">
-                <div class="product-img"></div>
+                <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1603006905003-be475563bc59?w=600&q=80');"></div>
                 <h3 class="product-name">PEARLS CANDLE</h3>
                 <p class="product-price">From $285</p>
             </div>
             <div class="product-card">
-                <div class="product-img"></div>
+                <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1602874801006-27071fab8c4d?w=600&q=80');"></div>
                 <h3 class="product-name">SCENTED CANDLE FLOOR</h3>
                 <p class="product-price">From $1,045</p>
             </div>
             <div class="product-card">
-                <div class="product-img"></div>
+                <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1598928506311-c55ded91a20c?w=600&q=80');"></div>
                 <h3 class="product-name">FEATHERS CANDLE BRONZE</h3>
                 <p class="product-price">From $285</p>
             </div>
@@ -549,23 +548,23 @@
             <p>Each piece becomes a treasured memory when presented in our signature packaging. Discover the perfect gift for those who appreciate the finer things.</p>
         </div>
         <div class="gifting-images">
-            <div class="gift-img"></div>
-            <div class="gift-img"></div>
-            <div class="gift-img"></div>
+            <div class="gift-img" style="background-image: url('https://images.unsplash.com/photo-1513885535751-8b9238bd345a?w=600&q=80');"></div>
+            <div class="gift-img" style="background-image: url('https://images.unsplash.com/photo-1607811810348-7ebb3c02f8b9?w=600&q=80');"></div>
+            <div class="gift-img" style="background-image: url('https://images.unsplash.com/photo-1549122728-f519709caa9c?w=600&q=80');"></div>
         </div>
     </section>
 
     <section class="categories fade-in">
-        <div class="category-card">
+        <div class="category-card" style="background-image: url('https://images.unsplash.com/photo-1602874801006-27071fab8c4d?w=600&q=80');">
             <h3>SCENTED<br>CANDLES</h3>
         </div>
-        <div class="category-card">
+        <div class="category-card" style="background-image: url('https://images.unsplash.com/photo-1603006905003-be475563bc59?w=600&q=80');">
             <h3>HOME<br>FRAGRANCES</h3>
         </div>
-        <div class="category-card">
+        <div class="category-card" style="background-image: url('https://images.unsplash.com/photo-1549122728-f519709caa9c?w=600&q=80');">
             <h3>GIFTS</h3>
         </div>
-        <div class="category-card">
+        <div class="category-card" style="background-image: url('https://images.unsplash.com/photo-1608181918050-5a99d2d45c9e?w=600&q=80');">
             <h3>HOLIDAY<br>WELLNESS</h3>
         </div>
     </section>
@@ -577,11 +576,11 @@
             <p>The result is not just a candle, but an experience that transforms your space into a sanctuary of elegance and warmth.</p>
             <a href="#" class="btn">DISCOVER</a>
         </div>
-        <div class="craftsman-img"></div>
+        <div class="craftsman-img" style="background-image: url('https://images.unsplash.com/photo-1610701596007-11502861dcfa?w=800&q=80');"></div>
     </section>
 
     <section class="stores fade-in">
-        <div class="stores-img"></div>
+        <div class="stores-img" style="background-image: url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&q=80');"></div>
         <div class="stores-content">
             <h2>OUR STORES</h2>
             <p>Visit our boutiques around the world to experience the full range of our collections. Our knowledgeable staff will guide you through our fragrances to find the perfect match for your home.</p>
@@ -593,17 +592,17 @@
         <h2>NEWS</h2>
         <div class="news-grid">
             <div class="news-card">
-                <div class="news-img"></div>
+                <div class="news-img" style="background-image: url('https://images.unsplash.com/photo-1602874801006-27071fab8c4d?w=600&q=80');"></div>
                 <h3>FESTIVE CANDLES BY DRIES OTTEN</h3>
                 <p class="news-date">December 2024</p>
             </div>
             <div class="news-card">
-                <div class="news-img"></div>
+                <div class="news-img" style="background-image: url('https://images.unsplash.com/photo-1603006905003-be475563bc59?w=600&q=80');"></div>
                 <h3>PINK OCTOBER: THE STORY OF THE WOMEN</h3>
                 <p class="news-date">October 2024</p>
             </div>
             <div class="news-card">
-                <div class="news-img"></div>
+                <div class="news-img" style="background-image: url('https://images.unsplash.com/photo-1598928506311-c55ded91a20c?w=600&q=80');"></div>
                 <h3>ORIENTALIST MERGE COLLECTION</h3>
                 <p class="news-date">May 2024</p>
             </div>
