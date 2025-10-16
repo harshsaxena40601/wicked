@@ -41,6 +41,8 @@
     .product-card:hover img {
       transform: scale(1.05);
     }
+    /* Uniform aspect for 'You May Also Like' thumbnails */
+    .also-like-img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; display: block; }
     
     /* Button Animations */
     .btn-primary {
@@ -392,18 +394,18 @@
       YOU MAY ALSO LIKE IT
     </h3>
     <div class="relative">
-      <button aria-label="Scroll left" class="hidden md:flex absolute -left-4 top-1/2 -translate-y-1/2 z-10 bg-white border px-3 py-2" data-carousel-prev="#also-like-list">‹</button>
-      <button aria-label="Scroll right" class="hidden md:flex absolute -right-4 top-1/2 -translate-y-1/2 z-10 bg-white border px-3 py-2" data-carousel-next="#also-like-list">›</button>
+      <button aria-label="Scroll left" class="flex absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-black text-white border border-black/20 rounded-full px-4 py-3 shadow" data-carousel-prev="#also-like-list">‹</button>
+      <button aria-label="Scroll right" class="flex absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-black text-white border border-black/20 rounded-full px-4 py-3 shadow" data-carousel-next="#also-like-list">›</button>
       <div id="also-like-list" class="flex justify-center items-start space-x-8 overflow-x-auto scrollbar-hide pr-6">
         <div class="product-card flex-shrink-0 max-w-[260px] cursor-pointer relative group" data-product='{"name":"DIFFUSER FEATHERS","price":130,"image":"https://images.unsplash.com/photo-1615486363874-5168a9f1e9bd?q=80&w=640&auto=format&fit=crop","stock":5}'>
-          <img alt="Diffuser Feathers luxury home fragrance" class="w-full h-auto mb-5" src="https://images.unsplash.com/photo-1615486363874-5168a9f1e9bd?q=80&w=640&auto=format&fit=crop"/>
+          <img alt="Diffuser Feathers luxury home fragrance" class="also-like-img mb-5" src="https://images.unsplash.com/photo-1615486363874-5168a9f1e9bd?q=80&w=640&auto=format&fit=crop"/>
           <button class="absolute top-2 right-2 text-[11px] bg-white/90 px-2 py-1 border wishlist-btn">♡</button>
           <button class="absolute bottom-3 left-1/2 -translate-x-1/2 text-[11px] bg-black text-white px-3 py-1 opacity-0 group-hover:opacity-100 transition quickshop-btn">QUICK SHOP</button>
           <h4 class="text-xs tracking-[0.15em] text-center mb-2 font-light">DIFFUSER FEATHERS</h4>
           <p class="text-sm tracking-[0.1em] text-center font-light">€130</p>
         </div>
         <div class="product-card flex-shrink-0 max-w-[260px] cursor-pointer relative group" data-product='{"name":"SCENTED CANDLE WHITE PEARLS","price":55,"image":"https://images.unsplash.com/photo-1519681399649-8b58f7b561e6?q=80&w=640&auto=format&fit=crop","stock":0}'>
-          <img alt="White Pearls scented candle collection" class="w-full h-auto mb-5" src="https://images.unsplash.com/photo-1519681399649-8b58f7b561e6?q=80&w=640&auto=format&fit=crop"/>
+          <img alt="White Pearls scented candle collection" class="also-like-img mb-5" src="https://images.unsplash.com/photo-1519681399649-8b58f7b561e6?q=80&w=640&auto=format&fit=crop"/>
           <button class="absolute top-2 right-2 text-[11px] bg-white/90 px-2 py-1 border wishlist-btn">♡</button>
           <span class="absolute top-2 left-2 text-[10px] bg-[#1a1918] text-white px-2 py-1">OUT OF STOCK</span>
           <button disabled class="absolute bottom-3 left-1/2 -translate-x-1/2 text-[11px] bg-gray-400 text-white px-3 py-1 opacity-60 cursor-not-allowed quickshop-btn">QUICK SHOP</button>
@@ -411,28 +413,28 @@
           <p class="text-sm tracking-[0.1em] text-center font-light">From €55</p>
         </div>
         <div class="product-card flex-shrink-0 max-w-[260px] cursor-pointer relative group" data-product='{"name":"LES EXCLUSIVES PLATINUM","price":55,"image":"https://images.unsplash.com/photo-1602872021202-70c4b9f78b46?q=80&w=640&auto=format&fit=crop","stock":12}'>
-          <img alt="Platinum Les Exclusives luxury candle" class="w-full h-auto mb-5" src="https://images.unsplash.com/photo-1602872021202-70c4b9f78b46?q=80&w=640&auto=format&fit=crop"/>
+          <img alt="Platinum Les Exclusives luxury candle" class="also-like-img mb-5" src="https://images.unsplash.com/photo-1602872021202-70c4b9f78b46?q=80&w=640&auto=format&fit=crop"/>
           <button class="absolute top-2 right-2 text-[11px] bg-white/90 px-2 py-1 border wishlist-btn">♡</button>
           <button class="absolute bottom-3 left-1/2 -translate-x-1/2 text-[11px] bg-black text-white px-3 py-1 opacity-0 group-hover:opacity-100 transition quickshop-btn">QUICK SHOP</button>
           <h4 class="text-xs tracking-[0.15em] text-center mb-2 font-light">LES EXCLUSIVES PLATINUM</h4>
           <p class="text-sm tracking-[0.1em] text-center font-light">From €55</p>
         </div>
         <div class="product-card flex-shrink-0 max-w-[260px] cursor-pointer relative group" data-product='{"name":"DIFFUSER FEATHERS TOUAREG","price":130,"image":"https://images.unsplash.com/photo-1519710164239-da123dc03ef4?q=80&w=640&auto=format&fit=crop","stock":7}'>
-          <img alt="Diffuser Feathers Touareg" class="w-full h-auto mb-5" src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?q=80&w=640&auto=format&fit=crop"/>
+          <img alt="Diffuser Feathers Touareg" class="also-like-img mb-5" src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?q=80&w=640&auto=format&fit=crop"/>
           <button class="absolute top-2 right-2 text-[11px] bg-white/90 px-2 py-1 border wishlist-btn">♡</button>
           <button class="absolute bottom-3 left-1/2 -translate-x-1/2 text-[11px] bg-black text-white px-3 py-1 opacity-0 group-hover:opacity-100 transition quickshop-btn">QUICK SHOP</button>
           <h4 class="text-xs tracking-[0.15em] text-center mb-2 font-light">DIFFUSER FEATHERS TOUAREG</h4>
           <p class="text-sm tracking-[0.1em] text-center font-light">€130</p>
         </div>
         <div class="product-card flex-shrink-0 max-w-[260px] cursor-pointer relative group" data-product='{"name":"SCENTED CANDLE PEARLS BLACK","price":55,"image":"https://images.unsplash.com/photo-1546500840-ae38253aba9b?q=80&w=640&auto=format&fit=crop","stock":20}'>
-          <img alt="Pearls Black scented candle" class="w-full h-auto mb-5" src="https://images.unsplash.com/photo-1546500840-ae38253aba9b?q=80&w=640&auto=format&fit=crop"/>
+          <img alt="Pearls Black scented candle" class="also-like-img mb-5" src="https://images.unsplash.com/photo-1546500840-ae38253aba9b?q=80&w=640&auto=format&fit=crop"/>
           <button class="absolute top-2 right-2 text-[11px] bg-white/90 px-2 py-1 border wishlist-btn">♡</button>
           <button class="absolute bottom-3 left-1/2 -translate-x-1/2 text-[11px] bg-black text-white px-3 py-1 opacity-0 group-hover:opacity-100 transition quickshop-btn">QUICK SHOP</button>
           <h4 class="text-xs tracking-[0.15em] text-center mb-2 font-light">SCENTED CANDLE PEARLS BLACK</h4>
           <p class="text-sm tracking-[0.1em] text-center font-light">From €55</p>
         </div>
         <div class="product-card flex-shrink-0 max-w-[260px] cursor-pointer relative group" data-product='{"name":"SCENTED CANDLE ARABIAN NIGHTS","price":105,"image":"https://images.unsplash.com/photo-1519681393314-0a6f0ae1e82e?q=80&w=640&auto=format&fit=crop","stock":3}'>
-          <img alt="Arabian Nights scented candle" class="w-full h-auto mb-5" src="https://images.unsplash.com/photo-1519681393314-0a6f0ae1e82e?q=80&w=640&auto=format&fit=crop"/>
+          <img alt="Arabian Nights scented candle" class="also-like-img mb-5" src="https://images.unsplash.com/photo-1519681393314-0a6f0ae1e82e?q=80&w=640&auto=format&fit=crop"/>
           <button class="absolute top-2 right-2 text-[11px] bg-white/90 px-2 py-1 border wishlist-btn">♡</button>
           <button class="absolute bottom-3 left-1/2 -translate-x-1/2 text-[11px] bg-black text-white px-3 py-1 opacity-0 group-hover:opacity-100 transition quickshop-btn">QUICK SHOP</button>
           <h4 class="text-xs tracking-[0.15em] text-center mb-2 font-light">SCENTED CANDLE ARABIAN NIGHTS</h4>
@@ -454,8 +456,8 @@
       RECOMMENDED FOR YOU  |  BEST SELLERS
     </p>
     <div class="relative">
-      <button aria-label="Scroll left" class="hidden md:flex absolute -left-4 top-1/2 -translate-y-1/2 z-10 bg-white border px-3 py-2" data-carousel-prev="#inspired-list">‹</button>
-      <button aria-label="Scroll right" class="hidden md:flex absolute -right-4 top-1/2 -translate-y-1/2 z-10 bg-white border px-3 py-2" data-carousel-next="#inspired-list">›</button>
+      <button aria-label="Scroll left" class="flex absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-black text-white border border-black/20 rounded-full px-4 py-3 shadow" data-carousel-prev="#inspired-list">‹</button>
+      <button aria-label="Scroll right" class="flex absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-black text-white border border-black/20 rounded-full px-4 py-3 shadow" data-carousel-next="#inspired-list">›</button>
       <div id="inspired-list" class="flex justify-center items-start space-x-8 overflow-x-auto scrollbar-hide pr-6">
         <div class="product-card flex-shrink-0 max-w-[260px] cursor-pointer relative group" data-product='{"name":"ADVENT CALENDAR VOYAGE EXTRAORDINAIRE","price":490,"image":"https://images.unsplash.com/photo-1543087903-1ac2ec7aa8c5?q=80&w=640&auto=format&fit=crop","stock":0}'>
           <img alt="Advent Calendar Voyage Extraordinaire collection" class="w-full h-auto mb-5" src="https://images.unsplash.com/photo-1543087903-1ac2ec7aa8c5?q=80&w=640&auto=format&fit=crop"/>
@@ -1007,13 +1009,13 @@
       const target = btn.getAttribute('data-carousel-prev');
       const container = document.querySelector(target);
       if (!container) return;
-      btn.addEventListener('click', () => container.scrollBy({ left: -container.clientWidth, behavior: 'smooth' }));
+      btn.addEventListener('click', () => container.scrollBy({ left: -container.clientWidth, behavior: 'auto' }));
     });
     document.querySelectorAll('[data-carousel-next]').forEach(btn => {
       const target = btn.getAttribute('data-carousel-next');
       const container = document.querySelector(target);
       if (!container) return;
-      btn.addEventListener('click', () => container.scrollBy({ left: container.clientWidth, behavior: 'smooth' }));
+      btn.addEventListener('click', () => container.scrollBy({ left: container.clientWidth, behavior: 'auto' }));
     });
 
     // Image resilience: set referrerpolicy and fallbacks
