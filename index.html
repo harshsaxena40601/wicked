@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Baobab Collection - Luxury Home Fragrances</title>
+    <title> wickitcandles - Luxury Home Fragrances</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css">
     <style>
         * {
             margin: 0;
@@ -109,7 +110,7 @@
         }
 
         .btn:hover {
-            background: transparent;
+            background: #d02929;
             color: white;
             transform: translateY(-2px);
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
@@ -205,7 +206,7 @@
 
         .gifting-content {
             padding: 100px;
-            background: #f9f7f4;
+            background: #d8d5d1;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -351,6 +352,7 @@
             margin-bottom: 60px;
             letter-spacing: 3px;
             font-weight: 300;
+            
         }
 
         .news-grid {
@@ -472,6 +474,77 @@
             transform: translateY(0);
         }
 
+        .categories-carousel,
+        .news-carousel {
+            width: 100%;
+            padding: 50px 0;
+            background: #f9f7f4;
+        }
+
+        .categories-carousel .swiper,
+        .news-carousel .swiper {
+            width: 100%;
+            padding: 20px;
+        }
+
+        .swiper-slide {
+            height: 400px;
+            position: relative;
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        .swiper-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .slide-content {
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            color: white;
+            z-index: 2;
+        }
+
+        .slide-content h3 {
+            font-size: 24px;
+            font-weight: 300;
+            letter-spacing: 2px;
+            margin: 0;
+        }
+
+        .slide-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.7));
+        }
+
+        .swiper-button-next,
+        .swiper-button-prev {
+            color: #fff;
+            background: rgba(0,0,0,0.5);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+
+        .swiper-button-next:after,
+        .swiper-button-prev:after {
+            font-size: 20px;
+        }
+
+        .swiper-pagination-bullet {
+            background: #fff;
+            opacity: 0.5;
+        }
+
+        .swiper-pagination-bullet-active {
+            background: #fff;
+            opacity: 1;
+        }
+
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
@@ -501,7 +574,7 @@
 </head>
 <body>
     <nav id="nav">
-        <div class="logo">BAOBAB</div>
+        <div class="logo"> wickitcandles</div>
         <ul class="nav-links">
             <li><a href="#home">HOME</a></li>
             <li><a href="#collections">COLLECTIONS</a></li>
@@ -513,7 +586,7 @@
 
     <section class="hero" id="home">
         <div class="hero-content">
-            <h1>LUXURIOUS<br>SCENTED CANDLES</h1>
+            <h1  style="text-shadow: #1a1a1a;">LUXURIOUS<br>SCENTED CANDLES</h1>
             <p>Discover the art of exceptional home fragrances crafted with passion and precision.</p>
             <a href="#" class="btn">SHOP NOW</a>
         </div>
@@ -528,14 +601,14 @@
                 <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1603006905003-be475563bc59?w=600&q=80');"></div>
                 <h3 class="product-name">PEARLS CANDLE</h3>
                 <p class="product-price">From $285</p>
-            </div>
+            </div> 
             <div class="product-card">
-                <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1602874801006-27071fab8c4d?w=600&q=80');"></div>
+                <div class="product-img" style="background-image: url('https://cdn.shopify.com/s/files/1/0953/9744/5953/files/9.jpg?v=1759659797');"></div>
                 <h3 class="product-name">SCENTED CANDLE FLOOR</h3>
                 <p class="product-price">From $1,045</p>
             </div>
             <div class="product-card">
-                <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1598928506311-c55ded91a20c?w=600&q=80');"></div>
+                <div class="product-img" style="background-image: url('https://cdn.shopify.com/s/files/1/0953/9744/5953/files/7.jpg?v=1760601972');"></div>
                 <h3 class="product-name">FEATHERS CANDLE BRONZE</h3>
                 <p class="product-price">From $285</p>
             </div>
@@ -548,24 +621,47 @@
             <p>Each piece becomes a treasured memory when presented in our signature packaging. Discover the perfect gift for those who appreciate the finer things.</p>
         </div>
         <div class="gifting-images">
-            <div class="gift-img" style="background-image: url('https://images.unsplash.com/photo-1513885535751-8b9238bd345a?w=600&q=80');"></div>
-            <div class="gift-img" style="background-image: url('https://images.unsplash.com/photo-1607811810348-7ebb3c02f8b9?w=600&q=80');"></div>
-            <div class="gift-img" style="background-image: url('https://images.unsplash.com/photo-1549122728-f519709caa9c?w=600&q=80');"></div>
+            <div class="gift-img" style="background-image: url('https://cdn.shopify.com/s/files/1/0953/9744/5953/files/7.jpg?v=1760601972');"></div>
+            <div class="gift-img" style="background-image: url('https://cdn.shopify.com/s/files/1/0953/9744/5953/files/6.jpg?v=1759659798');"></div>
+            <div class="gift-img" style="background-image: url('https://cdn.shopify.com/s/files/1/0953/9744/5953/files/5.jpg?v=1759659796');"></div>
         </div>
     </section>
 
-    <section class="categories fade-in">
-        <div class="category-card" style="background-image: url('https://images.unsplash.com/photo-1602874801006-27071fab8c4d?w=600&q=80');">
-            <h3>SCENTED<br>CANDLES</h3>
-        </div>
-        <div class="category-card" style="background-image: url('https://images.unsplash.com/photo-1603006905003-be475563bc59?w=600&q=80');">
-            <h3>HOME<br>FRAGRANCES</h3>
-        </div>
-        <div class="category-card" style="background-image: url('https://images.unsplash.com/photo-1549122728-f519709caa9c?w=600&q=80');">
-            <h3>GIFTS</h3>
-        </div>
-        <div class="category-card" style="background-image: url('https://images.unsplash.com/photo-1608181918050-5a99d2d45c9e?w=600&q=80');">
-            <h3>HOLIDAY<br>WELLNESS</h3>
+    <section class="categories-carousel">
+        <div class="swiper categories-swiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div class="slide-overlay"></div>
+                    <img src="https://cdn.shopify.com/s/files/1/0953/9744/5953/files/9.jpg?v=1759659797" alt="Scented Candles">
+                    <div class="slide-content">
+                        <h3>SCENTED<br>CANDLES</h3>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="slide-overlay"></div>
+                    <img src="https://cdn.shopify.com/s/files/1/0953/9744/5953/files/2.jpg?v=1759659797" alt="Home Fragrances">
+                    <div class="slide-content">
+                        <h3>HOME<br>FRAGRANCES</h3>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="slide-overlay"></div>
+                    <img src="https://cdn.shopify.com/s/files/1/0953/9744/5953/files/6.jpg?v=1759659798" alt="Holiday Gifts">
+                    <div class="slide-content">
+                        <h3>HOLIDAY<br>GIFTS</h3>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="slide-overlay"></div>
+                    <img src="https://cdn.shopify.com/s/files/1/0953/9744/5953/files/5.jpg?v=1759659796" alt="Wellness">
+                    <div class="slide-content">
+                        <h3>WELLNESS</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
         </div>
     </section>
 
@@ -588,24 +684,38 @@
         </div>
     </section>
 
-    <section class="news fade-in">
+    <section class="news-carousel">
         <h2>NEWS</h2>
-        <div class="news-grid">
-            <div class="news-card">
-                <div class="news-img" style="background-image: url('https://images.unsplash.com/photo-1602874801006-27071fab8c4d?w=600&q=80');"></div>
-                <h3>FESTIVE CANDLES BY DRIES OTTEN</h3>
-                <p class="news-date">December 2024</p>
+        <div class="swiper news-swiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div class="slide-overlay"></div>
+                    <img src="https://cdn.shopify.com/s/files/1/0953/9744/5953/files/7.jpg?v=1760601972" alt="Festive Candles">
+                    <div class="slide-content">
+                        <h3>FESTIVE CANDLES BY DRIES OTTEN</h3>
+                        <p class="news-date">December 2024</p>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="slide-overlay"></div>
+                    <img src="https://cdn.shopify.com/s/files/1/0953/9744/5953/files/2.jpg?v=1759659797" alt="Pink October">
+                    <div class="slide-content">
+                        <h3>PINK OCTOBER: THE STORY OF THE WOMEN</h3>
+                        <p class="news-date">October 2024</p>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="slide-overlay"></div>
+                    <img src="https://cdn.shopify.com/s/files/1/0953/9744/5953/files/9.jpg?v=1759659797" alt="Orientalist Collection">
+                    <div class="slide-content">
+                        <h3>ORIENTALIST MERGE COLLECTION</h3>
+                        <p class="news-date">May 2024</p>
+                    </div>
+                </div>
             </div>
-            <div class="news-card">
-                <div class="news-img" style="background-image: url('https://images.unsplash.com/photo-1603006905003-be475563bc59?w=600&q=80');"></div>
-                <h3>PINK OCTOBER: THE STORY OF THE WOMEN</h3>
-                <p class="news-date">October 2024</p>
-            </div>
-            <div class="news-card">
-                <div class="news-img" style="background-image: url('https://images.unsplash.com/photo-1598928506311-c55ded91a20c?w=600&q=80');"></div>
-                <h3>ORIENTALIST MERGE COLLECTION</h3>
-                <p class="news-date">May 2024</p>
-            </div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
         </div>
     </section>
 
@@ -643,10 +753,11 @@
             </div>
         </div>
         <div class="copyright">
-            © 2025 Baobab Collection. All rights reserved.
+            © 2025  wickitcandles. All rights reserved.
         </div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
     <script>
         // Scroll animations
         const observerOptions = {
@@ -709,6 +820,59 @@
             card.addEventListener('mouseleave', () => {
                 card.style.transform = '';
             });
+        });
+
+        // Initialize Swiper
+        const categoriesSwiper = new Swiper('.categories-swiper', {
+            slidesPerView: 1,
+            spaceBetween: 20,
+            loop: true,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            breakpoints: {
+                640: {
+                    slidesPerView: 2,
+                },
+                1024: {
+                    slidesPerView: 3,
+                }
+            },
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+            }
+        });
+
+        const newsSwiper = new Swiper('.news-swiper', {
+            slidesPerView: 1,
+            spaceBetween: 20,
+            loop: true,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            breakpoints: {
+                640: {
+                    slidesPerView: 2,
+                },
+                1024: {
+                    slidesPerView: 3,
+                }
+            },
+            autoplay: {
+                delay: 4000,
+                disableOnInteraction: false,
+            }
         });
     </script>
 </body>
