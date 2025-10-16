@@ -58,4 +58,58 @@ document.addEventListener('DOMContentLoaded', () => {
     section.classList.add('reveal');
     observer.observe(section);
   });
+
+  // Mobile Menu functionality
+  const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+  const navLinks = document.querySelector('.nav-links');
+
+  mobileMenuBtn.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+  });
+
+  // Close menu when clicking outside
+  document.addEventListener('click', (e) => {
+      if (!navLinks.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+          navLinks.classList.remove('active');
+      }
+  });
+
+  // Updated Swiper configuration
+  const swiperConfig = {
+      slidesPerView: 1,
+      spaceBetween: 20,
+      loop: true,
+      pagination: {
+          el: '.swiper-pagination',
+          clickable: true
+      },
+      navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+      },
+      breakpoints: {
+          640: {
+              slidesPerView: 2,
+          },
+          1024: {
+              slidesPerView: 3,
+          }
+      },
+      autoplay: {
+          delay: 5000,
+          disableOnInteraction: false,
+      },
+      touchRatio: 1,
+      grabCursor: true,
+      touchStartPreventDefault: false,
+      touchMoveStopPropagation: true,
+      touchEventsTarget: 'wrapper',
+      shortSwipes: true,
+      longSwipes: true,
+      longSwipesRatio: 0.5,
+      longSwipesMs: 300,
+  }
+
+  const categoriesSwiper = new Swiper('.categories-swiper', swiperConfig);
+  const newsSwiper = new Swiper('.news-swiper', swiperConfig);
 });
