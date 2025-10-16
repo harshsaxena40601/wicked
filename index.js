@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title> wickitcandles</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/script.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --luxury-gold: #C9A050;
+      --luxury-cream: #F8F5F1;
+      --luxury-charcoal: #2C2C2C; 
+      --luxury-gradient: linear-gradient(45deg, var(--luxury-gold), #E2C275);
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      letter-spacing: 0.08em;
+      font-weight: 300;
+      background: var(--luxury-cream);
+      color: var(--luxury-charcoal);
+    }
+    .playfair {
+      font-family: "Playfair Display", serif;
+      font-weight: 400;
+    }
+    .scrollbar-hide::-webkit-scrollbar {
+      display: none;
+    }
+    .scrollbar-hide {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    
+    /* Product Card Animations */
+    .product-card {
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .product-card:hover {
+      transform: translateY(-8px);
+    }
+    .product-card img {
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .product-card:hover img {
+      transform: scale(1.05);
+    }
+    /* Uniform aspect for 'You May Also Like' thumbnails */
+    .also-like-img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; display: block; }
+    
+    /* Uniform aspect for 'Be Inspired' thumbnails */
+    .inspired-img { 
+      width: 100%;
+      height: 325px;
+      object-fit: cover;
+      display: block;
+    }
+    
+    /* Category Item Uniform Size */
+    .category-item img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; display: block; }
+    
+    /* News Article Uniform Size */
+    article img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; display: block; }
+    
+    /* Gift Slider Uniform Size */
+    #gifting-slider img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; display: block; }
+    
+    /* Craftsman and Stories Section Images */
+    .crafts-img, .stories-img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; }
+    
+    /* Button Animations */
+    .btn-primary {
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: white;
+      transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: -1;
+    }
+    .btn-primary:hover::before {
+      left: 0;
+    }
+    .btn-primary:hover {
+      color: black;
+      border-color: white;
+    }
+    
+    /* Category Item Animations */
+    .category-item {
+      position: relative;
+      overflow: hidden;
+    }
+    .category-item img {
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .category-item:hover img {
+      transform: scale(1.1);
+    }
+    .category-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.4);
+      opacity: 0;
+      transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .category-item:hover .category-overlay {
+      opacity: 1;
+    }
+    
+    /* Navigation Dropdown Animations */
+    nav .group > div {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transform: translateY(-10px);
+    }
+    nav .group:hover > div {
+      transform: translateY(0);
+    }
+    
+    /* Wishlist Button Animation */
+    .wishlist-btn {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .wishlist-btn:hover {
+      transform: scale(1.1);
+      background: white;
+    }
+    .wishlist-btn.active {
+      color: red;
+    }
+    
+    /* Quick Shop Button Animation */
+    .quickshop-btn {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transform: translateY(10px);
+    }
+    .product-card:hover .quickshop-btn {
+      transform: translateY(0);
+    }
+    
+    /* Modal Animations */
+    .modal-overlay {
+      animation: fadeIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .modal-content {
+      animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes slideUp {
+      from { 
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to { 
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    /* Cart Drawer Animation */
+    #cart-drawer {
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    /* Carousel Button Animations */
+    [data-carousel-prev], [data-carousel-next] {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: var(--luxury-charcoal);
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      z-index: 10;
+    }
+
+    [data-carousel-prev] {
+      left: -50px; /* Position outside container */
+    }
+
+    [data-carousel-next] {
+      right: -50px; /* Position outside container */
+    }
+
+    [data-carousel-prev]:hover, [data-carousel-next]:hover {
+      background: var(--luxury-gold);
+      transform: translateY(-50%) scale(1.1);
+    }
+    
+    /* Hero Content Animation */
+    .hero-content {
+      animation: fadeInLeft 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    @keyframes fadeInLeft {
+      from {
+        opacity: 0;
+        transform: translate(-50%, -50%) translateX(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translate(-50%, -50%) translateX(0);
+      }
+    }
+    
+    /* News Article Hover */
+    article img {
+      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    article:hover img {
+      transform: scale(1.05);
+    }
+    
+    /* Link Hover Effects */
+    a, button {
+      position: relative;
+    }
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: currentColor;
+      transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    nav a:hover::after {
+      width: 100%;
+    }
+    
+    /* Smooth Scroll */
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: "Montserrat", sans-serif;
+      letter-spacing: 0.08em;
+      font-weight: 300;
+    }
+    .playfair {
+      font-family: "Playfair Display", serif;
+      font-weight: 400;
+    }
+    .scrollbar-hide::-webkit-scrollbar {
+      display: none;
+    }
+    .scrollbar-hide {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .product-card {
+      transition: transform 0.3s ease;
+    }
+    .product-card:hover {
+      transform: translateY(-5px);
+    }
+    .btn-primary {
+      transition: all 0.3s ease;
+    }
+    .btn-primary:hover {
+      background: white;
+      color: black;
+    }
+    .category-item {
+      position: relative;
+      overflow: hidden;
+    }
+    .category-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.3);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .category-item:hover .category-overlay {
+      opacity: 1;
+    }
+    /* Animations */
+    @keyframes heroZoom {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.06); }
+    }
+    @keyframes fadeUp {
+      0% { opacity: 0; transform: translateY(16px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .anim-hero-zoom {
+      animation: heroZoom 18s ease-in-out infinite alternate;
+      will-change: transform;
+    }
+    .anim-overlay-fade {
+      animation: fadeUp 700ms ease both 200ms;
+    }
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity 600ms ease, transform 600ms ease; }
+    .reveal.show { opacity: 1; transform: translateY(0); }
+
+    /* Add these CSS rules */
+    .be-inspired-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 2rem;
+      padding: 0 1rem;
+    }
+
+    .product-card {
+      max-width: 260px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    /* Update the carousel button styles in your existing <style> tag */
+    [data-carousel-prev], [data-carousel-next] {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: var(--luxury-charcoal);
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      z-index: 10;
+    }
+
+    [data-carousel-prev] {
+      left: -50px; /* Position outside container */
+    }
+
+    [data-carousel-next] {
+      right: -50px; /* Position outside container */
+    }
+
+    [data-carousel-prev]:hover, [data-carousel-next]:hover {
+      background: var(--luxury-gold);
+      transform: translateY(-50%) scale(1.1);
+    }
+    
+    /* Add padding to container to accommodate arrows */
+    .carousel-container {
+      position: relative;
+      padding: 0 60px;
+      overflow: visible;
+    }
+
+    /* Update header classes */
+    header {
+      position: fixed;
+      width: 100%;
+      z-index: 50;
+      transition: all 0.3s;
+    }
+
+    /* Update hero section classes */
+    .hero-section {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+    }
+
+    /* Update category card classes */
+    .category-card {
+      position: relative;
+      overflow: hidden;
+    }
+    .category-card img {
+      transform: scale(1);
+      transition: transform 0.7s;
+    }
+    .category-card:hover img {
+      transform: scale(1.1);
+    }
+    .category-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+    .category-card:hover .category-overlay {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body class="bg-white text-black">
+  <!-- Header -->
+  <header class="fixed w-full z-50 transition-all duration-300">
+  <nav>
+    <div class="nav-links">
+      <a href="#">Collections</a>
+      <a href="#">About Us</a>
+      <a href="#">Contact</a>
+    </div>
+    <a href="/" class="logo">WICKIT</a>
+    <div class="nav-links">
+      <a href="#">Search</a>
+      <a href="#">Account</a>
+      <a href="#">Cart (0)</a>
+    </div>
+  </nav>
+</header>
+
+  <!-- Hero Section -->
+  <section class="relative w-full h-screen">
+    <div class="absolute inset-0">
+      <img src="images/hero.jpg" alt="Luxury Candles" class="w-full h-full object-cover">
+      <div class="absolute inset-0 bg-black/30"></div>
+    </div>
+    <div class="relative h-full flex items-center justify-center text-white text-center">
+      <div class="max-w-3xl px-6">
+        <h1 class="luxury-heading text-5xl md:text-7xl mb-6">Discover Our Luxury Collection</h1>
+        <p class="text-lg md:text-xl mb-8 tracking-wide">Handcrafted candles for moments of pure elegance</p>
+        <button class="btn-primary">Shop Now</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- You May Also Like -->
+  <section class="max-w-7xl mx-auto px-6 lg:px-20 mt-24 reveal">
+    <h3 class="luxury-heading text-center text-3xl mb-12">YOU MAY ALSO LIKE IT</h3>
+    <div class="carousel-container">
+      <button class="carousel-btn" data-carousel-prev aria-label="Previous slide">‹</button>
+      <div class="carousel-content">
+        <div class="carousel-card">
+          <div class="product-card">
+            <img src="path/to/image.jpg" alt="Product" class="w-full aspect-square object-cover">
+            <div class="product-info">
+              <h4 class="text-lg">Product Name</h4>
+              <p class="text-sm">Price</p>
+            </div>
+          </div>
+        </div>
+        <!-- Repeat for other cards -->
+      </div>
+      <button class="carousel-btn" data-carousel-next aria-label="Next slide">›</button>
+    </div>
+  </section>
+  <div class="max-w-7xl mx-auto px-6 lg:px-20 mt-6 mb-6 text-center">
+    <a href="#" class="text-[11px] tracking-[0.2em] underline">SEE EVERYTHING</a>
+  </div>
+
+  <!-- Be Inspired -->
+  <section class="max-w-7xl mx-auto px-6 lg:px-20 mt-24 reveal">
+    <h3 class="playfair text-center text-3xl font-normal tracking-[0.15em] mb-3">
+      BE INSPIRED
+    </h3>
+    <p class="text-center text-xs tracking-[0.2em] mb-12 font-light">
+      RECOMMENDED FOR YOU  |  BEST SELLERS
+    </p>
+    <p class="text-center text-[11px] tracking-wide mb-8 opacity-80">
+      Discover curated candle picks to elevate every room — from cozy nights to festive gatherings.
+    </p>
+    <div class="relative">
+      <button aria-label="Scroll left" class="flex absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-black text-white border border-black/20 rounded-full px-4 py-3 shadow" data-carousel-prev="#inspired-list">‹</button>
+      <button aria-label="Scroll right" class="flex absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-black text-white border border-black/20 rounded-full px-4 py-3 shadow" data-carousel-next="#inspired-list">›</button>
+      <div id="inspired-list" class="flex justify-center items-start space-x-8 overflow-x-auto scrollbar-hide">
+        <div class="product-card flex-shrink-0 max-w-[260px] cursor-pointer relative group" data-product='{"name":"ADVENT CALENDAR VOYAGE EXTRAORDINAIRE","price":490,"image":"https://images.unsplash.com/photo-1505575972943-331f2bca5ef0?q=80&w=640&auto=format&fit=crop","stock":0}'>
+          <img alt="Advent Calendar Voyage Extraordinaire collection" class="inspired-img mb-5" src="https://images.unsplash.com/photo-1505575972943-331f2bca5ef0?q=80&w=640&auto=format&fit=crop"/>
+          <button class="absolute top-2 right-2 text-[11px] bg-white/90 px-2 py-1 border wishlist-btn">♡</button>
+          <span class="absolute top-2 left-2 text-[10px] bg-[#1a1918] text-white px-2 py-1">OUT OF STOCK</span>
+          <button disabled class="absolute bottom-3 left-1/2 -translate-x-1/2 text-[11px] bg-gray-400 text-white px-3 py-1 opacity-60 cursor-not-allowed quickshop-btn">QUICK SHOP</button>
+          <h4 class="text-xs tracking-[0.15em] text-center mb-2 font-light">ADVENT CALENDAR VOYAGE EXTRAORDINAIRE</h4>
+          <p class="text-sm tracking-[0.1em] text-center font-light">€490</p>
+        </div>
+        <div class="product-card flex-shrink-0 max-w-[260px] cursor-pointer relative group" data-product='{"name":"SCENTED CANDLE I LOVE SKI","price":105,"image":"https://images.unsplash.com/photo-1519682337058-a94d519337bc?q=80&w=640&auto=format&fit=crop","stock":8}'>
+          <img alt="I Love Ski scented candle winter collection" class="inspired-img mb-5" src="https://images.unsplash.com/photo-1519682337058-a94d519337bc?q=80&w=640&auto=format&fit=crop"/>
+          <button class="absolute top-2 right-2 text-[11px] bg-white/90 px-2 py-1 border wishlist-btn">♡</button>
+          <button class="absolute bottom-3 left-1/2 -translate-x-1/2 text-[11px] bg-black text-white px-3 py-1 opacity-0 group-hover:opacity-100 transition quickshop-btn">QUICK SHOP</button>
+          <h4 class="text-xs tracking-[0.15em] text-center mb-2 font-light">SCENTED CANDLE I LOVE SKI</h4>
+          <p class="text-sm tracking-[0.1em] text-center font-light">From €105</p>
+        </div>
+        <div class="product-card flex-shrink-0 max-w-[260px] cursor-pointer relative group" data-product='{"name":"SCENTED CANDLE ROSACE","price":105,"image":"https://images.unsplash.com/photo-1505575967455-40e256f73376?q=80&w=640&auto=format&fit=crop","stock":15}'>
+          <img alt="Rosace scented candle with winter notes" class="inspired-img mb-5" src="https://images.unsplash.com/photo-1505575967455-40e256f73376?q=80&w=640&auto=format&fit=crop"/>
+          <button class="absolute top-2 right-2 text-[11px] bg-white/90 px-2 py-1 border wishlist-btn">♡</button>
+          <button class="absolute bottom-3 left-1/2 -translate-x-1/2 text-[11px] bg-black text-white px-3 py-1 opacity-0 group-hover:opacity-100 transition quickshop-btn">QUICK SHOP</button>
+          <h4 class="text-xs tracking-[0.15em] text-center mb-2 font-light">SCENTED CANDLE ROSACE</h4>
+          <p class="text-sm tracking-[0.1em] text-center font-light">From €105</p>
+        </div>
+        <div class="product-card flex-shrink-0 max-w-[260px] cursor-pointer relative group" data-product='{"name":"SCENTED CANDLE LES EXCLUSIVES CYPRIUM","price":55,"image":"https://images.unsplash.com/photo-1519681391409-d69f6e0cd726?q=80&w=640&auto=format&fit=crop"}'>
+          <img alt="Les Exclusives Cyprium candle" class="inspired-img mb-5" src="https://images.unsplash.com/photo-1519681391409-d69f6e0cd726?q=80&w=640&auto=format&fit=crop"/>
+          <button class="absolute top-2 right-2 text-[11px] bg-white/90 px-2 py-1 border wishlist-btn">♡</button>
+          <button class="absolute bottom-3 left-1/2 -translate-x-1/2 text-[11px] bg-black text-white px-3 py-1 opacity-0 group-hover:opacity-100 transition quickshop-btn">QUICK SHOP</button>
+          <h4 class="text-xs tracking-[0.15em] text-center mb-2 font-light">LES EXCLUSIVES CYPRIUM</h4>
+          <p class="text-sm tracking-[0.1em] text-center font-light">From €55</p>
+        </div>
+        <div class="product-card flex-shrink-0 max-w-[260px] cursor-pointer relative group" data-product='{"name":"SCENTED CANDLE STONES MARBLE","price":105,"image":"https://images.unsplash.com/photo-1512250591270-0bea37004f66?q=80&w=640&auto=format&fit=crop"}'>
+          <img alt="Stones Marble candle" class="inspired-img mb-5" src="https://images.unsplash.com/photo-1512250591270-0bea37004f66?q=80&w=640&auto=format&fit=crop"/>
+          <button class="absolute top-2 right-2 text-[11px] bg-white/90 px-2 py-1 border wishlist-btn">♡</button>
+          <button class="absolute bottom-3 left-1/2 -translate-x-1/2 text-[11px] bg-black text-white px-3 py-1 opacity-0 group-hover:opacity-100 transition quickshop-btn">QUICK SHOP</button>
+          <h4 class="text-xs tracking-[0.15em] text-center mb-2 font-light">SCENTED CANDLE STONES MARBLE</h4>
+          <p class="text-sm tracking-[0.1em] text-center font-light">From €105</p>
+        </div>
+        <div class="product-card flex-shrink-0 max-w-[260px] cursor-pointer relative group" data-product='{"name":"SCENTED CANDLE SAND SILOLI","price":105,"image":"https://images.unsplash.com/photo-1470115636492-6d2b56f9146e?q=80&w=640&auto=format&fit=crop"}'>
+          <img alt="Sand Siloli candle" class="also-like-img mb-5" src="https://images.unsplash.com/photo-1470115636492-6d2b56f9146e?q=80&w=640&auto=format&fit=crop"/>
+          <button class="absolute top-2 right-2 text-[11px] bg-white/90 px-2 py-1 border wishlist-btn">♡</button>
+          <button class="absolute bottom-3 left-1/2 -translate-x-1/2 text-[11px] bg-black text-white px-3 py-1 opacity-0 group-hover:opacity-100 transition quickshop-btn">QUICK SHOP</button>
+          <h4 class="text-xs tracking-[0.15em] text-center mb-2 font-light">SCENTED CANDLE SAND SILOLI</h4>
+          <p class="text-sm tracking-[0.1em] text-center font-light">From €105</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="max-w-7xl mx-auto px-6 lg:px-20 mt-6 mb-6 text-center">
+    <a href="#" class="text-[11px] tracking-[0.2em] underline">SEE EVERYTHING</a>
+  </div>
+
+  <!-- Be Inspired -->
+  <section class="max-w-7xl mx-auto px-6 lg:px-20 mt-24 reveal">
+    <h3 class="playfair text-center text-3xl font-normal tracking-[0.15em] mb-3">
+      BE INSPIRED
+    </h3>
+    <p class="text-center text-xs tracking-[0.2em] mb-12 font-light">
+      RECOMMENDED FOR YOU  |  BEST SELLERS
+    </p>
+    <p class="text-center text-[11px] tracking-wide mb-8 opacity-80">
+      Discover curated candle picks to elevate every room — from cozy nights to festive gatherings.
+    </p>
+    <div class="relative">
+      <button aria-label="Scroll left" class="flex absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-black text-white border border-black/20 rounded-full px-4 py-3 shadow" data-carousel-prev="#inspired-list">‹</button>
+      <button aria-label="Scroll right" class="flex absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-black text-white border border-black/20 rounded-full px-4 py-3 shadow" data-carousel-next="#inspired-list">›</button>
+      <div id="inspired-list" class="flex justify-center items-start space-x-8 overflow-x-auto scrollbar-hide">
+        <div class="product-card flex-shrink-0 max-w-[260px] cursor-pointer relative group" data-product='{"name":"ADVENT CALENDAR VOYAGE EXTRAORDINAIRE","price":490,"image":"https://images.unsplash.com/photo-1505575972943-331f2bca5ef0?q=80&w=640&auto=format&fit=crop","stock":0}'>
+          <img alt="Advent Calendar Voyage Extraordinaire collection" class="inspired-img mb-5" src="https://images.unsplash.com/photo-1505575972943-331f2bca5ef0?q=80&w=640&auto=format&fit=crop"/>
+          <button class="absolute top-2 right-2 text-[11px] bg-white/90 px-2 py-1 border wishlist-btn">♡</button>
+          <span class="absolute top-2 left-2 text-[10px] bg-[#1a1918] text-white px-2 py-1">OUT OF STOCK</span>
+          <button disabled class="absolute bottom-3 left-1/2 -translate-x-1/2 text-[11px] bg-gray-400 text-white px-3 py-1 opacity-60 cursor-not-allowed quickshop-btn">QUICK SHOP</button>
+          <h4 class="text-xs tracking-[0.15em] text-center mb-2 font-light">ADVENT CALENDAR VOYAGE EXTRAORDINAIRE</h4>
+          <p class="text-sm tracking-[0.1em] text-center font-light">€490</p>
+        </div>
+        <div class="product-card flex-shrink-0 max-w-[260px] cursor-pointer relative group" data-product='{"name":"SCENTED CANDLE I LOVE SKI","price":105,"image":"https://images.unsplash.com/photo-1519682337058-a94d519337bc?q=80&w=640&auto=format&fit=crop","stock":8}'>
+          <img alt="I Love Ski scented candle winter collection" class="inspired-img mb-5" src="https://images.unsplash.com/photo-1519682337058-a94d519337bc?q=80&w=640&auto=format&fit=crop"/>
+          <button class="absolute top-2 right-2 text-[11px] bg-white/90 px-2 py-1 border wishlist-btn">♡</button>
+          <button class="absolute bottom-3 left-1/2 -translate-x-1/2 text-[11px] bg-black text-white px-3 py-1 opacity-0 group-hover:opacity-100 transition quickshop-btn">QUICK SHOP</button>
+          <h4 class="text-xs tracking-[0.15em] text-center mb-2 font-light">SCENTED CANDLE I LOVE SKI</h4>
+          <p class="text-sm tracking-[0.1em] text-center font-light">From €105</p>
+        </div>
+        <div class="product-card flex-shrink-0 max-w-[260px] cursor-pointer relative group" data-product='{"name":"SCENTED CANDLE ROSACE","price":105,"image":"https://images.unsplash.com/photo-1505575967455-40e256f73376?q=80&w=640&auto=format&fit=crop","stock":15}'>
+          <img alt="Rosace scented candle with winter notes" class="inspired-img mb-5" src="https://images.unsplash.com/photo-1505575967455-40e256f73376?q=80&w=640&auto=format&fit=crop"/>
+          <button class="absolute top-2 right-2 text-[11px] bg-white/90 px-2 py-1 border wishlist-btn">♡</button>
+          <button class="absolute bottom-3 left-1/2 -translate-x-1/2 text-[11px] bg-black text-white px-3 py-1 opacity-0 group-hover:opacity-100 transition quickshop-btn">QUICK SHOP</button>
+          <h4 class="text-xs tracking-[0.15em] text-center mb-2 font-light">SCENTED CANDLE ROSACE</h4>
+          <p class="text-sm tracking-[0.1em] text-center font-light">From €105</p>
+        </div>
+        <div class="product-card flex-shrink-0 max-w-[260px] cursor-pointer relative group" data-product='{"name":"SCENTED CANDLE LES EXCLUSIVES CYPRIUM","price":55,"image":"https://images.unsplash.com/photo-1519681391409-d69f6e0cd726?q=80&w=640&auto=format&fit=crop"}'>
+          <img alt="Les Exclusives Cyprium candle" class="inspired-img mb-5" src="https://images.unsplash.com/photo-1519681391409-d69f6e0cd726?q=80&w=640&auto=format&fit=crop"/>
+          <button class="absolute top-2 right-2 text-[11px] bg-white/90 px-2 py-1 border wishlist-btn">♡</button>
+          <button class="absolute bottom-3 left-1/2 -translate-x-1/2 text-[11px] bg-black text-white px-3 py-1 opacity-0 group-hover:opacity-100 transition quickshop-btn">QUICK SHOP</button>
+          <h4 class="text-xs tracking-[0.15em] text-center mb-2 font-light">LES EXCLUSIVES CYPRIUM</h4>
+          <p class="text-sm tracking-[0.1em] text-center font-light">From €55</p>
+        </div>
+        <div class="product-card flex-shrink-0 max-w-[260px] cursor-pointer relative group" data-product='{"name":"SCENTED CANDLE STONES MARBLE","price":105,"image":"https://images.unsplash.com/photo-1512250591270-0bea37004f66?q=80&w=640&auto=format&fit=crop"}'>
+          <img alt="Stones Marble candle" class="inspired-img mb-5" src="https://images.unsplash.com/photo-1512250591270-0bea37004f66?q=80&w=640&auto=format&fit=crop"/>
+          <button class="absolute top-2 right-2 text-[11px] bg-white/90 px-2 py-1 border wishlist-btn">♡</button>
+          <button class="absolute bottom-3 left-1/2 -translate-x-1/2 text-[11px] bg-black text-white px-3 py-1 opacity-0 group-hover:opacity-100 transition quickshop-btn">QUICK SHOP</button>
+          <h4 class="text-xs tracking-[0.15em] text-center mb-2 font-light">SCENTED CANDLE STONES MARBLE</h4>
+          <p class="text-sm tracking-[0.1em] text-center font-light">From €105</p>
+        </div>
+        <div class="product-card flex-shrink-0 max-w-[260px] cursor-pointer relative group" data-product='{"name":"SCENTED CANDLE SAND SILOLI","price":105,"image":"https://images.unsplash.com/photo-1470115636492-6d2b56f9146e?q=80&w=640&auto=format&fit=crop"}'>
+          <img alt="Sand Siloli candle" class="also-like-img mb-5" src="https://images.unsplash.com/photo-1470115636492-6d2b56f9146e?q=80&w=640&auto=format&fit=crop"/>
+          <button class="absolute top-2 right-2 text-[11px] bg-white/90 px-2 py-1 border wishlist-btn">♡</button>
+          <button class="absolute bottom-3 left-1/2 -translate-x-1/2 text-[11px] bg-black text-white px-3 py-1 opacity-0 group-hover:opacity-100 transition quickshop-btn">QUICK SHOP</button>
+          <h4 class="text-xs tracking-[0.15em] text-center mb-2 font-light">SCENTED CANDLE SAND SILOLI</h4>
+          <p class="text-sm tracking-[0.1em] text-center font-light">From €105</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="max-w-7xl mx-auto px-6 lg:px-20 mt-6 mb-6 text-center">
+    <a href="#" class="text-[11px] tracking-[0.2em] underline">SEE EVERYTHING</a>
+  </div>
+
+  <!-- Featured Collections Section -->
+  <section class="max-w-7xl mx-auto px-6 lg:px-20 mt-24 reveal">
+    <h2 class="luxury-heading text-center text-3xl mb-16">Featured Collections</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="product-card">
+        <div class="relative overflow-hidden">
+          <img src="images/collection1.jpg" alt="Signature Collection" class="w-full aspect-[4/5] object-cover">
+          <div class="absolute inset-0 bg-black/20 opacity-0 hover:opacity-100 transition-opacity">
+            <div class="absolute bottom-8 left-8">
+              <h3 class="text-white text-2xl mb-2">Signature Collection</h3>
+              <button class="text-white border-b border-white">Shop Now</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Repeat for other collections -->
+    </div>
+  </section>
+
+  <!-- Newsletter Section with Enhanced Styling -->
+  <section class="bg-luxury-cream py-24 mt-24 reveal">
+    <div class="max-w-2xl mx-auto text-center px-6">
+      <h2 class="luxury-heading text-3xl mb-6">Join Our Newsletter</h2>
+      <p class="mb-8 text-luxury-charcoal/80">Subscribe to receive updates, access to exclusive deals, and more.</p>
+      <form class="flex flex-col md:flex-row gap-4 justify-center">
+        <input type="email" placeholder="Enter your email" class="px-6 py-3 border border-luxury-charcoal/20 bg-transparent focus:border-luxury-gold transition-all duration-300">
+        <button class="btn-primary hover:scale-105 transition-transform duration-300">Subscribe</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Testimonials Section with Enhanced Layout -->
+  <section class="max-w-7xl mx-auto px-6 lg:px-20 py-24 reveal">
+    <h2 class="luxury-heading text-center text-3xl mb-16">What Our Clients Say</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+      <div class="text-center hover:scale-105 transition-transform duration-300">
+        <div class="text-luxury-gold text-4xl mb-6">"</div>
+        <p class="mb-6 italic text-luxury-charcoal/80">Absolutely stunning candles. The scents are divine and the packaging is exquisite.</p>
+        <p class="text-sm text-luxury-charcoal/60">- Sarah M.</p>
+      </div>
+      <!-- Add two more testimonials -->
+    </div>
+  </section>
+
+  <!-- Footer Top Links -->
+  <section class="max-w-7xl mx-auto px-6 lg:px-20 py-8 text-[10px] font-light tracking-[0.2em] text-center">
+    <div class="flex flex-wrap justify-center gap-x-8 gap-y-2">
+      <a class="hover:opacity-60 transition-opacity" href="#">FREE DELIVERY FROM 150€</a>
+      <a class="hover:opacity-60 transition-opacity" href="#">SECURE PAYMENT</a>
+      <a class="hover:opacity-60 transition-opacity" href="#">BIRTHDAY GIFT</a>
+      <a class="hover:opacity-60 transition-opacity" href="#">ELEGANT GIFT WRAPPING</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-[#1a1918] text-white py-16">
+    <div class="max-w-7xl mx-auto px-6 lg:px-20 grid grid-cols-1 md:grid-cols-4 gap-12">
+      <div class="space-y-6 max-w-xs">
+        <img alt=" wickitcandles logo" class="w-20 h-auto" src="https://placehold.co/80x80/fff/1a1918?text=BAOBAB"/>
+        <p class="text-[10px] font-light leading-relaxed tracking-wide">
+          Four steps to unique and slow scented collections created by hand in the heart of the workshops
+        </p>
+        <div class="flex space-x-5 text-base">
+          <a aria-label="Facebook" class="hover:opacity-70 transition-opacity" href="#">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a aria-label="Instagram" class="hover:opacity-70 transition-opacity" href="#">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a aria-label="Pinterest" class="hover:opacity-70 transition-opacity" href="#">
+            <i class="fab fa-pinterest-p"></i>
+          </a>
+          <a aria-label="YouTube" class="hover:opacity-70 transition-opacity" href="#">
+            <i class="fab fa-youtube"></i>
+          </a>
+        </div>
+      </div>
+      <div class="flex flex-col space-y-3 text-[10px] font-light tracking-wide">
+        <a class="hover:opacity-70 transition-opacity" href="#">HOME</a>
+        <a class="hover:opacity-70 transition-opacity" href="#">FAQ</a>
+        <a class="hover:opacity-70 transition-opacity" href="#">ABOUT</a>
+        <a class="hover:opacity-70 transition-opacity" href="#">CONTACT</a>
+        <a class="hover:opacity-70 transition-opacity" href="#">STORE LOCATOR</a>
+      </div>
+      <div class="flex flex-col space-y-4 text-[10px] font-light">
+        <label class="text-[11px] tracking-[0.15em] font-light" for="newsletter">
+          SUBSCRIBE TO OUR NEWSLETTER
+        </label>
+        <input class="p-3 text-black text-xs bg-white" id="newsletter" placeholder="Your email address" type="email"/>
+        <button class="border-2 border-white text-white text-xs tracking-[0.2em] px-6 py-3 w-max font-light hover:bg-white hover:text-black transition-all">
+          SUBSCRIBE
+        </button>
+      </div>
+      <div class="flex flex-col justify-end text-[10px] font-light tracking-wide">
+        <p>©  wickitcandles 2025</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Footer Legal Links -->
+  <section class="max-w-7xl mx-auto px-6 lg:px-20 py-6 text-[9px] font-light tracking-[0.2em] text-center">
+    <div class="flex flex-wrap justify-center gap-x-6 gap-y-2">
+      <a class="hover:opacity-60 transition-opacity" href="#">GENERAL TERMS AND CONDITIONS</a>
+      <a class="hover:opacity-60 transition-opacity" href="#">PRIVACY POLICY</a>
+      <a class="hover:opacity-60 transition-opacity" href="#">ACCESSIBILITY</a>
+      <a class="hover:opacity-60 transition-opacity" href="#">TERMS OF SERVICE</a>
+      <a class="hover:opacity-60 transition-opacity" href="#">REFUND POLICY</a>
+    </div>
+  </section>
+
+  <!-- Country Modal -->
+  <div id="country-modal" class="fixed inset-0 bg-black/50 hidden items-center justify-center p-4 z-[100]">
+    <div class="bg-white w-full max-w-2xl p-8">
+      <div class="flex justify-between items-center mb-6">
+        <h4 class="playfair text-lg tracking-[0.15em]">SELECT YOUR LANGUAGE</h4>
+        <button id="close-country" class="text-sm hover:opacity-60">CLOSE</button>
+      </div>
+      <div class="grid grid-cols-2 gap-4 text-xs mb-8">
+        <button class="border border-gray-300 px-4 py-3 hover:bg-gray-100 transition">ENGLISH</button>
+        <button class="border border-gray-300 px-4 py-3 hover:bg-gray-100 transition">DEUTSCH</button>
+        <button class="border border-gray-300 px-4 py-3 hover:bg-gray-100 transition">NEDERLANDS</button>
+        <button class="border border-gray-300 px-4 py-3 hover:bg-gray-100 transition">ITALIANO</button>
+        <button class="border border-gray-300 px-4 py-3 hover:bg-gray-100 transition">ESPAÑOL</button>
+        <button class="border border-gray-300 px-4 py-3 hover:bg-gray-100 transition">FRANÇAIS</button>
+      </div>
+      <h4 class="playfair text-lg tracking-[0.15em] mb-4">CHANGE SHIPPING COUNTRY</h4>
+      <input class="w-full border border-gray-300 p-3 text-sm mb-4" placeholder="Search country"/>
+      <div class="h-48 overflow-auto border border-gray-300 p-4 text-xs space-y-2">
+        <p class="hover:bg-gray-100 p-2 cursor-pointer">France (€)</p>
+        <p class="hover:bg-gray-100 p-2 cursor-pointer">Germany (€)</p>
+        <p class="hover:bg-gray-100 p-2 cursor-pointer">United Kingdom (£)</p>
+        <p class="hover:bg-gray-100 p-2 cursor-pointer">United States ($)</p>
+        <p class="hover:bg-gray-100 p-2 cursor-pointer">United Arab Emirates (د.إ)</p>
+        <p class="hover:bg-gray-100 p-2 cursor-pointer">India (₹)</p>
+        <p class="hover:bg-gray-100 p-2 cursor-pointer">Japan (¥)</p>
+        <p class="hover:bg-gray-100 p-2 cursor-pointer">Australia ($)</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Search Modal -->
+  <div id="search-modal" class="fixed inset-0 bg-black/50 hidden items-center justify-center p-4 z-[100]">
+    <div class="bg-white w-full max-w-2xl p-8">
+      <div class="flex justify-between items-center mb-6">
+        <h4 class="playfair text-lg tracking-[0.15em]">SEARCH</h4>
+        <button id="close-search" class="text-sm hover:opacity-60">CLOSE</button>
+      </div>
+      <input class="w-full border border-gray-300 p-4 text-sm" placeholder="Search products..."/>
+    </div>
+  </div>
+
+  <!-- Cart Drawer -->
+  <div id="cart-drawer" class="fixed inset-y-0 right-0 w-96 max-w-[90vw] bg-white shadow-2xl translate-x-full transition-transform duration-300 z-[100]">
+    <div class="p-6 border-b border-gray-200 flex justify-between items-center">
+      <h4 class="playfair text-lg tracking-[0.15em]">CART</h4>
+      <button id="close-cart" class="text-sm hover:opacity-60">CLOSE</button>
+    </div>
+    <div id="cart-content" class="p-6 text-sm space-y-4">
+      <p id="cart-empty" class="mb-2 opacity-70">Your cart is empty.</p>
+      <div id="cart-progress" class="hidden">
+        <div class="text-[11px] mb-1">Spend €150 for free shipping</div>
+        <div class="w-full h-2 bg-gray-200">
+          <div id="cart-progress-bar" class="h-2 bg-black" style="width:0%"></div>
+        </div>
+        <div id="cart-progress-msg" class="text-[11px] mt-1 opacity-80"></div>
+      </div>
+      <div id="cart-items" class="space-y-3 hidden"></div>
+      <div id="cart-actions" class="pt-2 hidden">
+        <button class="border-2 border-black px-6 py-3 text-xs tracking-[0.2em] hover:bg-black hover:text-white transition-all mr-2">CONTINUE BROWSING</button>
+        <button class="bg-black text-white px-6 py-3 text-xs tracking-[0.2em]">CHECK OUT</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick Shop Modal -->
+  <div id="quickshop-modal" class="fixed inset-0 bg-black/50 hidden items-center justify-center p-4 z-[100]">
+    <div class="bg-white w-full max-w-xl p-8">
+      <div class="flex justify-between items-center mb-6">
+        <h4 class="playfair text-lg tracking-[0.15em]">QUICK SHOP</h4>
+        <button id="close-quickshop" class="text-sm hover:opacity-60">CLOSE</button>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 items-start">
+        <img id="qs-image" alt="Product image" class="w-full h-auto" src=""/>
+        <div>
+          <h5 id="qs-name" class="text-sm tracking-[0.15em] mb-2"></h5>
+          <p id="qs-price" class="text-xs mb-4"></p>
+          <div class="flex items-center space-x-3 mb-4">
+            <label class="text-[11px]" for="qs-qty">Qty</label>
+            <input id="qs-qty" type="number" min="1" value="1" class="w-16 border p-2 text-sm"/>
+          </div>
+          <button id="qs-add" class="bg-black text-white px-6 py-3 text-xs tracking-[0.2em]">ADD TO CART</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Sticky nav subtle elevation on scroll
+    (function(){
+      const nav = document.querySelector('nav');
+      let last = 0;
+      window.addEventListener('scroll', () => {
+        const y = window.scrollY || document.documentElement.scrollTop;
+        if (!nav) return;
+        if (y > 8 && last <= 8) {
+          nav.classList.add('shadow-sm');
+        } else if (y <= 8 && last > 8) {
+          nav.classList.remove('shadow-sm');
+        }
+        last = y;
+      }, { passive: true });
+    })();
+
+    // Intersection Observer to reveal sections/cards on scroll
+    (function(){
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('show');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+      document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+    })();
+    // Simple cart state
+    const cartState = { items: [] };
+    const wishlistState = new Set();
+    const cartCountEl = document.getElementById('cart-count');
+    function updateCartUI() {
+      const count = cartState.items.reduce((s, it) => s + it.quantity, 0);
+      if (cartCountEl) cartCountEl.textContent = String(count);
+      const itemsEl = document.getElementById('cart-items');
+      const emptyEl = document.getElementById('cart-empty');
+      const actionsEl = document.getElementById('cart-actions');
+      const progressWrap = document.getElementById('cart-progress');
+      const progressBar = document.getElementById('cart-progress-bar');
+      const progressMsg = document.getElementById('cart-progress-msg');
+      if (!itemsEl || !emptyEl || !actionsEl) return;
+      itemsEl.innerHTML = '';
+      if (cartState.items.length === 0) {
+        itemsEl.classList.add('hidden');
+        actionsEl.classList.add('hidden');
+        emptyEl.classList.remove('hidden');
+        if (progressWrap) progressWrap.classList.add('hidden');
+        return;
+      }
+      emptyEl.classList.add('hidden');
+      itemsEl.classList.remove('hidden');
+      actionsEl.classList.remove('hidden');
+      // progress toward free shipping (€150)
+      const subtotal = cartState.items.reduce((s, it) => s + it.price * it.quantity, 0);
+      const target = 150;
+      const pct = Math.max(0, Math.min(100, Math.round((subtotal / target) * 100)));
+      if (progressWrap && progressBar && progressMsg) {
+        progressWrap.classList.remove('hidden');
+        progressBar.style.width = pct + '%';
+        progressMsg.textContent = subtotal >= target ? 'You have free shipping!' : `€${(target - subtotal).toFixed(2)} left for free shipping`;
+      }
+      cartState.items.forEach((it, idx) => {
+        const row = document.createElement('div');
+        row.className = 'flex items-center justify-between border p-3';
+        row.innerHTML = `
+          <div class="flex items-center space-x-3">
+            <img src="${it.image}" alt="${it.name}" class="w-12 h-12 object-cover"/>
+            <div>
+              <p class="text-[11px] tracking-widest">${it.name}</p>
+              <p class="text-[11px] opacity-70">€${it.price} × ${it.quantity}</p>
+            </div>
+          </div>
+          <button data-remove-index="${idx}" class="text-[11px] underline">Remove</button>
+        `;
+        itemsEl.appendChild(row);
+      });
+      itemsEl.querySelectorAll('[data-remove-index]').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const i = Number(e.currentTarget.getAttribute('data-remove-index'));
+          cartState.items.splice(i, 1);
+          updateCartUI();
+        });
+      });
+    }
+    function addToCart(product, quantity = 1) {
+      const existing = cartState.items.find(it => it.name === product.name);
+      if (existing) existing.quantity += quantity; else cartState.items.push({ ...product, quantity });
+      updateCartUI();
+    }
+    // Country modal
+    const openCountry = document.getElementById('open-country');
+    const countryModal = document.getElementById('country-modal');
+    const closeCountry = document.getElementById('close-country');
+    
+    if (openCountry && countryModal && closeCountry) {
+      openCountry.addEventListener('click', () => {
+        countryModal.classList.remove('hidden');
+        countryModal.classList.add('flex');
+      });
+      closeCountry.addEventListener('click', () => {
+        countryModal.classList.add('hidden');
+        countryModal.classList.remove('flex');
+      });
+      countryModal.addEventListener('click', (e) => {
+        if (e.target === countryModal) {
+          countryModal.classList.add('hidden');
+          countryModal.classList.remove('flex');
+        }
+      });
+    }
+
+    // Search modal
+    const openSearch = document.getElementById('open-search');
+    const searchModal = document.getElementById('search-modal');
+    const closeSearch = document.getElementById('close-search');
+    
+    if (openSearch && searchModal && closeSearch) {
+      openSearch.addEventListener('click', () => {
+        searchModal.classList.remove('hidden');
+        searchModal.classList.add('flex');
+      });
+      closeSearch.addEventListener('click', () => {
+        searchModal.classList.add('hidden');
+        searchModal.classList.remove('flex');
+      });
+      searchModal.addEventListener('click', (e) => {
+        if (e.target === searchModal) {
+          searchModal.classList.add('hidden');
+          searchModal.classList.remove('flex');
+        }
+      });
+    }
+
+    // Cart drawer
+    const openCart = document.getElementById('open-cart');
+    const cartDrawer = document.getElementById('cart-drawer');
+    const closeCart = document.getElementById('close-cart');
+    
+    if (openCart && cartDrawer && closeCart) {
+      openCart.addEventListener('click', () => {
+        cartDrawer.classList.remove('translate-x-full');
+      });
+      closeCart.addEventListener('click', () => {
+        cartDrawer.classList.add('translate-x-full');
+      });
+    }
+
+    // Quick shop modal
+    const quickshopModal = document.getElementById('quickshop-modal');
+    const closeQuickshop = document.getElementById('close-quickshop');
+    const qsName = document.getElementById('qs-name');
+    const qsPrice = document.getElementById('qs-price');
+    const qsImage = document.getElementById('qs-image');
+    const qsAdd = document.getElementById('qs-add');
+    const qsQty = document.getElementById('qs-qty');
+    let qsProduct = null;
+    function openQuickshop(product) {
+      qsProduct = product;
+      qsName.textContent = product.name;
+      qsPrice.textContent = `€${product.price}`;
+      qsImage.src = product.image;
+      if (qsQty) qsQty.value = '1';
+      quickshopModal.classList.remove('hidden');
+      quickshopModal.classList.add('flex');
+    }
+    if (closeQuickshop) {
+      closeQuickshop.addEventListener('click', () => { quickshopModal.classList.add('hidden'); quickshopModal.classList.remove('flex'); });
+      quickshopModal.addEventListener('click', (e) => { if (e.target === quickshopModal) { quickshopModal.classList.add('hidden'); quickshopModal.classList.remove('flex'); } });
+    }
+    if (qsAdd) {
+      qsAdd.addEventListener('click', () => {
+        if (qsProduct) {
+          const qty = qsQty ? Math.max(1, parseInt(qsQty.value || '1', 10)) : 1;
+          addToCart(qsProduct, qty);
+        }
+      });
+    }
+
+    // Bind product cards (wishlist + quick shop)
+    document.querySelectorAll('[data-product]').forEach(card => {
+      const product = JSON.parse(card.getAttribute('data-product'));
+      const qsBtn = card.querySelector('.quickshop-btn');
+      const wlBtn = card.querySelector('.wishlist-btn');
+      // disable quick shop if out of stock
+      if (product.stock === 0 && qsBtn) {
+        qsBtn.setAttribute('disabled', 'true');
+        qsBtn.classList.add('cursor-not-allowed');
+      }
+      if (qsBtn) qsBtn.addEventListener('click', () => openQuickshop(product));
+      if (wlBtn) wlBtn.addEventListener('click', () => {
+        if (wishlistState.has(product.name)) {
+          wishlistState.delete(product.name);
+          wlBtn.textContent = '♡';
+        } else {
+          wishlistState.add(product.name);
+          wlBtn.textContent = '♥';
+        }
+        const wc = document.getElementById('wishlist-count');
+        if (wc) wc.textContent = String(wishlistState.size);
+      });
+    });
+
+    // Carousel controls
+    document.querySelectorAll('[data-carousel-prev]').forEach(btn => {
+      const target = btn.getAttribute('data-carousel-prev');
+      const container = document.querySelector(target);
+      if (!container) return;
+      btn.addEventListener('click', () => container.scrollBy({ left: -container.clientWidth, behavior: 'auto' }));
+    });
+    document.querySelectorAll('[data-carousel-next]').forEach(btn => {
+      const target = btn.getAttribute('data-carousel-next');
+      const container = document.querySelector(target);
+      if (!container) return;
+      btn.addEventListener('click', () => container.scrollBy({ left: container.clientWidth, behavior: 'auto' }));
+    });
+
+    // Art of Gifting slider
+    (function(){
+      const slider = document.getElementById('gifting-slider');
+      if (!slider) return;
+      const track = slider.querySelector('[data-gifting-track]');
+      const prev = slider.querySelector('[data-gifting-prev]');
+      const next = slider.querySelector('[data-gifting-next]');
+      const dotsWrap = slider.querySelector('[data-gifting-dots]');
+      const slides = track ? Array.from(track.children) : [];
+      let index = 0;
+      function update() {
+        const offset = -index * 100;
+        track.style.transform = `translateX(${offset}%)`;
+        dotsWrap.querySelectorAll('[data-gifting-dot]').forEach((d, i) => {
+          d.classList.toggle('bg-black', i === index);
+          d.classList.toggle('bg-gray-300', i !== index);
+        });
+      }
+      function go(n) {
+        index = (n + slides.length) % slides.length;
+        update();
+      }
+      if (prev) prev.addEventListener('click', () => go(index - 1));
+      if (next) next.addEventListener('click', () => go(index + 1));
+      if (dotsWrap) dotsWrap.querySelectorAll('[data-gifting-dot]').forEach((d) => {
+        d.addEventListener('click', () => go(Number(d.getAttribute('data-gifting-dot'))));
+      });
+      update();
+    })();
+
+    // Image resilience: set referrerpolicy and fallbacks
+    (function(){
+      const FALLBACK_URL = 'https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=800&auto=format&fit=crop';
+      document.querySelectorAll('img').forEach((img) => {
+        if (!img.getAttribute('referrerpolicy')) img.setAttribute('referrerpolicy', 'no-referrer');
+        if (!img.getAttribute('loading')) img.setAttribute('loading', 'lazy');
+        img.addEventListener('error', function onErr(){
+          if (img.dataset.fallbackApplied === '1') return;
+          img.dataset.fallbackApplied = '1';
+          img.src = FALLBACK_URL;
+        }, { once: true });
+      });
+    })();
+
+    // Init UI
+    updateCartUI();
+  </script>
+</body>
+</html>
