@@ -3,18 +3,27 @@
 <head>
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1" name="viewport"/>
-  <title>Baobab Collection</title>
+  <title> wickitcandles</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="style.css">
-
+  <link rel="stylesheet" href="/style.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400&display=swap" rel="stylesheet">
   <style>
-    
+    :root {
+      --luxury-gold: #C9A050;
+      --luxury-cream: #F8F5F1;
+      --luxury-charcoal: #2C2C2C; 
+      --luxury-gradient: linear-gradient(45deg, var(--luxury-gold), #E2C275);
+    }
+
     body {
-      font-family: "Montserrat", sans-serif;
+      font-family: 'Montserrat', sans-serif;
       letter-spacing: 0.08em;
       font-weight: 300;
+      background: var(--luxury-cream);
+      color: var(--luxury-charcoal);
     }
     .playfair {
       font-family: "Playfair Display", serif;
@@ -410,13 +419,13 @@
   <section class="relative w-full overflow-hidden">
     <img alt="Elegant scented candles in glass on a table with soft light" class="w-full h-auto object-cover anim-hero-zoom" style="max-height: 700px;" src="https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1920&auto=format&fit=crop"/>
     <div class="absolute top-1/2 left-10 lg:left-32 -translate-y-1/2 bg-black/85 backdrop-blur-sm p-8 max-w-sm anim-overlay-fade">
-      <h2 class="playfair text-white text-2xl font-normal mb-3 tracking-[0.15em]">
+      <h2 class="luxury-heading">
         I LOVE SKI
       </h2>
       <p class="text-white text-sm font-light mb-6 tracking-wide leading-relaxed">
         The scent of the slopes
       </p>
-      <button class="btn-primary bg-black border-2 border-white text-white text-xs tracking-[0.2em] px-8 py-3 font-light">
+      <button class="btn-primary">
         SHOP NOW
       </button>
     </div>
@@ -533,7 +542,7 @@
           <p class="text-sm tracking-[0.1em] text-center font-light">From €105</p>
         </div>
         <div class="product-card flex-shrink-0 max-w-[260px] cursor-pointer relative group" data-product='{"name":"SCENTED CANDLE SAND SILOLI","price":105,"image":"https://images.unsplash.com/photo-1470115636492-6d2b56f9146e?q=80&w=640&auto=format&fit=crop"}'>
-          <img alt="Sand Siloli candle" class="inspired-img mb-5" src="https://images.unsplash.com/photo-1470115636492-6d2b56f9146e?q=80&w=640&auto=format&fit=crop"/>
+          <img alt="Sand Siloli candle" class="also-like-img mb-5" src="https://images.unsplash.com/photo-1470115636492-6d2b56f9146e?q=80&w=640&auto=format&fit=crop"/>
           <button class="absolute top-2 right-2 text-[11px] bg-white/90 px-2 py-1 border wishlist-btn">♡</button>
           <button class="absolute bottom-3 left-1/2 -translate-x-1/2 text-[11px] bg-black text-white px-3 py-1 opacity-0 group-hover:opacity-100 transition quickshop-btn">QUICK SHOP</button>
           <h4 class="text-xs tracking-[0.15em] text-center mb-2 font-light">SCENTED CANDLE SAND SILOLI</h4>
@@ -635,7 +644,7 @@
   <!-- Our Stories -->
   <section class="max-w-7xl mx-auto px-6 lg:px-20 mt-24 grid grid-cols-1 md:grid-cols-2 gap-12 bg-[#f9f6f4] py-16 items-center reveal">
     <div class="flex justify-center items-center">
-      <img alt="Baobab Collection boutique storefront" class="stories-img max-w-lg" src="https://images.unsplash.com/photo-1507133750040-4a8f57021586?q=80&w=1000&auto=format&fit=crop"/>
+      <img alt=" wickitcandles boutique storefront" class="stories-img max-w-lg" src="https://images.unsplash.com/photo-1507133750040-4a8f57021586?q=80&w=1000&auto=format&fit=crop"/>
     </div>
     <div class="flex flex-col justify-center max-w-xl mx-auto md:mx-0 px-8">
       <h3 class="playfair text-3xl font-normal tracking-[0.15em] mb-6">
@@ -713,7 +722,7 @@
   <footer class="bg-[#1a1918] text-white py-16">
     <div class="max-w-7xl mx-auto px-6 lg:px-20 grid grid-cols-1 md:grid-cols-4 gap-12">
       <div class="space-y-6 max-w-xs">
-        <img alt="Baobab Collection logo" class="w-20 h-auto" src="https://placehold.co/80x80/fff/1a1918?text=BAOBAB"/>
+        <img alt=" wickitcandles logo" class="w-20 h-auto" src="https://placehold.co/80x80/fff/1a1918?text=BAOBAB"/>
         <p class="text-[10px] font-light leading-relaxed tracking-wide">
           Four steps to unique and slow scented collections created by hand in the heart of the workshops
         </p>
@@ -749,7 +758,7 @@
         </button>
       </div>
       <div class="flex flex-col justify-end text-[10px] font-light tracking-wide">
-        <p>© Baobab Collection 2025</p>
+        <p>©  wickitcandles 2025</p>
       </div>
     </div>
   </footer>
