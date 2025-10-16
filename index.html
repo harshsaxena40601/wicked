@@ -6,6 +6,7 @@
   <title> wickitcandles</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="/style.css">
+  <script src="/script.js"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&display=swap" rel="stylesheet">
@@ -182,12 +183,34 @@
     
     /* Carousel Button Animations */
     [data-carousel-prev], [data-carousel-next] {
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      opacity: 0.7;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: var(--luxury-charcoal);
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      z-index: 10;
     }
+
+    [data-carousel-prev] {
+      left: -50px; /* Position outside container */
+    }
+
+    [data-carousel-next] {
+      right: -50px; /* Position outside container */
+    }
+
     [data-carousel-prev]:hover, [data-carousel-next]:hover {
-      opacity: 1;
-      transform: scale(1.1);
+      background: var(--luxury-gold);
+      transform: translateY(-50%) scale(1.1);
     }
     
     /* Hero Content Animation */
@@ -313,177 +336,139 @@
       margin: 0 auto;
       width: 100%;
     }
+
+    /* Update the carousel button styles in your existing <style> tag */
+    [data-carousel-prev], [data-carousel-next] {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: var(--luxury-charcoal);
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      z-index: 10;
+    }
+
+    [data-carousel-prev] {
+      left: -50px; /* Position outside container */
+    }
+
+    [data-carousel-next] {
+      right: -50px; /* Position outside container */
+    }
+
+    [data-carousel-prev]:hover, [data-carousel-next]:hover {
+      background: var(--luxury-gold);
+      transform: translateY(-50%) scale(1.1);
+    }
+    
+    /* Add padding to container to accommodate arrows */
+    .carousel-container {
+      position: relative;
+      padding: 0 60px;
+      overflow: visible;
+    }
+
+    /* Update header classes */
+    header {
+      position: fixed;
+      width: 100%;
+      z-index: 50;
+      transition: all 0.3s;
+    }
+
+    /* Update hero section classes */
+    .hero-section {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+    }
+
+    /* Update category card classes */
+    .category-card {
+      position: relative;
+      overflow: hidden;
+    }
+    .category-card img {
+      transform: scale(1);
+      transition: transform 0.7s;
+    }
+    .category-card:hover img {
+      transform: scale(1.1);
+    }
+    .category-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+    .category-card:hover .category-overlay {
+      opacity: 1;
+    }
   </style>
 </head>
 <body class="bg-white text-black">
   <!-- Header -->
-  <header class="relative z-50">
-    <!-- Top Banner -->
-    <div class="w-full bg-black text-white text-[10px] tracking-[0.2em] py-3 text-center font-light">
-      FREE DELIVERY FROM €150 OF PURCHASE
+  <header class="fixed w-full z-50 transition-all duration-300">
+  <nav>
+    <div class="nav-links">
+      <a href="#">Collections</a>
+      <a href="#">About Us</a>
+      <a href="#">Contact</a>
     </div>
-    
-    <!-- Utility Bar -->
-    <div class="w-full bg-[#2a2a2a] text-white text-[10px] tracking-[0.15em] font-light">
-      <div class="max-w-7xl mx-auto px-6 lg:px-20 py-2 flex justify-between items-center">
-        <div class="flex space-x-6">
-          <a class="hover:opacity-70 transition-opacity" href="#">STORES</a>
-          <a class="hover:opacity-70 transition-opacity" href="#">HELP CENTER</a>
-        </div>
-        <div class="flex space-x-6">
-          <a class="hover:opacity-70 transition-opacity" href="#">NEWS</a>
-          <a class="hover:opacity-70 transition-opacity" href="#">CONTACT</a>
-        </div>
-      </div>
+    <a href="/" class="logo">WICKIT</a>
+    <div class="nav-links">
+      <a href="#">Search</a>
+      <a href="#">Account</a>
+      <a href="#">Cart (0)</a>
     </div>
-    
-    <!-- Main Navigation -->
-    <nav class="flex items-center justify-between px-6 lg:px-20 py-5 text-[11px] font-light tracking-[0.2em] bg-white sticky top-0 z-50 border-b border-gray-100">
-      <div class="flex space-x-8 items-center">
-        <div class="relative group">
-          <a class="hover:opacity-60 transition-opacity" href="#">SCENTED CANDLES</a>
-          <div class="invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-300 absolute left-0 mt-6 w-[800px] bg-white shadow-xl border border-gray-100 p-10 grid grid-cols-3 gap-10">
-            <div>
-              <h5 class="playfair text-sm mb-4 font-medium">Shop</h5>
-              <ul class="space-y-2.5 text-[10px] tracking-wide">
-                <li><a class="hover:opacity-60 transition-opacity" href="#">Best sellers</a></li>
-                <li><a class="hover:opacity-60 transition-opacity" href="#">New arrivals</a></li>
-                <li><a class="hover:opacity-60 transition-opacity" href="#">All scented candles</a></li>
-                <li><a class="hover:opacity-60 transition-opacity" href="#">Candle gift sets</a></li>
-                <li><a class="hover:opacity-60 transition-opacity" href="#">Large candles</a></li>
-              </ul>
-            </div>
-            <div>
-              <h5 class="playfair text-sm mb-4 font-medium">Accessories</h5>
-              <ul class="space-y-2.5 text-[10px] tracking-wide">
-                <li><a class="hover:opacity-60 transition-opacity" href="#">Lighters</a></li>
-                <li><a class="hover:opacity-60 transition-opacity" href="#">Wick trimmer</a></li>
-                <li><a class="hover:opacity-60 transition-opacity" href="#">Snuffer</a></li>
-                <li><a class="hover:opacity-60 transition-opacity" href="#">Matches</a></li>
-              </ul>
-            </div>
-            <div>
-              <h5 class="playfair text-sm mb-4 font-medium">Table accessories</h5>
-              <ul class="space-y-2.5 text-[10px] tracking-wide">
-                <li><a class="hover:opacity-60 transition-opacity" href="#">Candle holders</a></li>
-                <li><a class="hover:opacity-60 transition-opacity" href="#">Candle sticks</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="relative group">
-          <a class="hover:opacity-60 transition-opacity" href="#">HOME FRAGRANCES</a>
-          <div class="invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-300 absolute left-0 mt-6 w-[800px] bg-white shadow-xl border border-gray-100 p-10 grid grid-cols-3 gap-10">
-            <div>
-              <h5 class="playfair text-sm mb-4 font-medium">Shop</h5>
-              <ul class="space-y-2.5 text-[10px] tracking-wide">
-                <li><a class="hover:opacity-60 transition-opacity" href="#">Best sellers</a></li>
-                <li><a class="hover:opacity-60 transition-opacity" href="#">New arrivals</a></li>
-                <li><a class="hover:opacity-60 transition-opacity" href="#">All home fragrances</a></li>
-                <li><a class="hover:opacity-60 transition-opacity" href="#">Diffuser gift sets</a></li>
-              </ul>
-            </div>
-            <div>
-              <h5 class="playfair text-sm mb-4 font-medium">Types</h5>
-              <ul class="space-y-2.5 text-[10px] tracking-wide">
-                <li><a class="hover:opacity-60 transition-opacity" href="#">Diffusers & Totems</a></li>
-                <li><a class="hover:opacity-60 transition-opacity" href="#">Home sprays</a></li>
-                <li><a class="hover:opacity-60 transition-opacity" href="#">Car diffusers</a></li>
-              </ul>
-            </div>
-            <div>
-              <h5 class="playfair text-sm mb-4 font-medium">Refills</h5>
-              <ul class="space-y-2.5 text-[10px] tracking-wide">
-                <li><a class="hover:opacity-60 transition-opacity" href="#">Refills</a></li>
-                <li><a class="hover:opacity-60 transition-opacity" href="#">Reeds</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <a class="hover:opacity-60 transition-opacity" href="#">BODY WELLNESS</a>
-        <a class="hover:opacity-60 transition-opacity" href="#">COLLECTIONS</a>
-        <a class="hover:opacity-60 transition-opacity" href="#">GIFT IDEAS</a>
-        <a class="hover:opacity-60 transition-opacity" href="#">ABOUT US</a>
-      </div>
-      <div class="flex items-center space-x-8 text-[11px] font-light tracking-[0.2em]">
-        <button id="open-country" class="hover:opacity-60 transition-opacity flex items-center gap-1" type="button">EN <span class="text-[8px]">▾</span></button>
-        <button id="open-search" class="hover:opacity-60 transition-opacity" type="button">SEARCH</button>
-        <a class="hover:opacity-60 transition-opacity" href="#">MY ACCOUNT</a>
-        <button id="open-wishlist" class="hover:opacity-60 transition-opacity" type="button">WISHLIST (<span id="wishlist-count">0</span>)</button>
-        <button id="open-cart" class="hover:opacity-60 transition-opacity" type="button">CART (<span id="cart-count">0</span>)</button>
-      </div>
-    </nav>
-  </header>
+  </nav>
+</header>
 
   <!-- Hero Section -->
-  <section class="relative w-full overflow-hidden">
-    <img alt="Elegant scented candles in glass on a table with soft light" class="w-full h-auto object-cover anim-hero-zoom" style="max-height: 700px;" src="https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1920&auto=format&fit=crop"/>
-    <div class="absolute top-1/2 left-10 lg:left-32 -translate-y-1/2 bg-black/85 backdrop-blur-sm p-8 max-w-sm anim-overlay-fade">
-      <h2 class="luxury-heading" style="color: #F8F5F1;">
-        I LOVE SKI
-      </h2>
-      <p class="text-white text-sm font-light mb-6 tracking-wide leading-relaxed">
-        The scent of the slopes
-      </p>
-      <button class="btn-primary">
-        SHOP NOW
-      </button>
+  <section class="relative w-full h-screen">
+    <div class="absolute inset-0">
+      <img src="images/hero.jpg" alt="Luxury Candles" class="w-full h-full object-cover">
+      <div class="absolute inset-0 bg-black/30"></div>
+    </div>
+    <div class="relative h-full flex items-center justify-center text-white text-center">
+      <div class="max-w-3xl px-6">
+        <h1 class="luxury-heading text-5xl md:text-7xl mb-6">Discover Our Luxury Collection</h1>
+        <p class="text-lg md:text-xl mb-8 tracking-wide">Handcrafted candles for moments of pure elegance</p>
+        <button class="btn-primary">Shop Now</button>
+      </div>
     </div>
   </section>
 
   <!-- You May Also Like -->
   <section class="max-w-7xl mx-auto px-6 lg:px-20 mt-24 reveal">
-    <h3 class="playfair text-center text-3xl font-normal tracking-[0.15em] mb-12">
-      YOU MAY ALSO LIKE IT
-    </h3>
-    <div class="relative">
-      <button aria-label="Scroll left" class="flex absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-black text-white border border-black/20 rounded-full px-4 py-3 shadow" data-carousel-prev="#also-like-list">‹</button>
-      <button aria-label="Scroll right" class="flex absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-black text-white border border-black/20 rounded-full px-4 py-3 shadow" data-carousel-next="#also-like-list">›</button>
-      <div id="also-like-list" class="flex justify-center items-start space-x-8 overflow-x-auto scrollbar-hide pr-6">
-        <div class="product-card flex-shrink-0 max-w-[260px] cursor-pointer relative group" data-product='{"name":"DIFFUSER FEATHERS","price":130,"image":"https://images.unsplash.com/photo-1615486363874-5168a9f1e9bd?q=80&w=640&auto=format&fit=crop","stock":5}'>
-          <img alt="Diffuser Feathers luxury home fragrance" class="also-like-img mb-5" src="https://images.unsplash.com/photo-1615486363874-5168a9f1e9bd?q=80&w=640&auto=format&fit=crop"/>
-          <button class="absolute top-2 right-2 text-[11px] bg-white/90 px-2 py-1 border wishlist-btn">♡</button>
-          <button class="absolute bottom-3 left-1/2 -translate-x-1/2 text-[11px] bg-black text-white px-3 py-1 opacity-0 group-hover:opacity-100 transition quickshop-btn">QUICK SHOP</button>
-          <h4 class="text-xs tracking-[0.15em] text-center mb-2 font-light">DIFFUSER FEATHERS</h4>
-          <p class="text-sm tracking-[0.1em] text-center font-light">€130</p>
+    <h3 class="luxury-heading text-center text-3xl mb-12">YOU MAY ALSO LIKE IT</h3>
+    <div class="carousel-container">
+      <button class="carousel-btn" data-carousel-prev aria-label="Previous slide">‹</button>
+      <div class="carousel-content">
+        <div class="carousel-card">
+          <div class="product-card">
+            <img src="path/to/image.jpg" alt="Product" class="w-full aspect-square object-cover">
+            <div class="product-info">
+              <h4 class="text-lg">Product Name</h4>
+              <p class="text-sm">Price</p>
+            </div>
+          </div>
         </div>
-        <div class="product-card flex-shrink-0 max-w-[260px] cursor-pointer relative group" data-product='{"name":"SCENTED CANDLE WHITE PEARLS","price":55,"image":"https://images.unsplash.com/photo-1519681399649-8b58f7b561e6?q=80&w=640&auto=format&fit=crop","stock":0}'>
-          <img alt="White Pearls scented candle collection" class="also-like-img mb-5" src="https://images.unsplash.com/photo-1519681399649-8b58f7b561e6?q=80&w=640&auto=format&fit=crop"/>
-          <button class="absolute top-2 right-2 text-[11px] bg-white/90 px-2 py-1 border wishlist-btn">♡</button>
-          <span class="absolute top-2 left-2 text-[10px] bg-[#1a1918] text-white px-2 py-1">OUT OF STOCK</span>
-          <button disabled class="absolute bottom-3 left-1/2 -translate-x-1/2 text-[11px] bg-gray-400 text-white px-3 py-1 opacity-60 cursor-not-allowed quickshop-btn">QUICK SHOP</button>
-          <h4 class="text-xs tracking-[0.15em] text-center mb-2 font-light">SCENTED CANDLE WHITE PEARLS</h4>
-          <p class="text-sm tracking-[0.1em] text-center font-light">From €55</p>
-        </div>
-        <div class="product-card flex-shrink-0 max-w-[260px] cursor-pointer relative group" data-product='{"name":"LES EXCLUSIVES PLATINUM","price":55,"image":"https://images.unsplash.com/photo-1602872021202-70c4b9f78b46?q=80&w=640&auto=format&fit=crop","stock":12}'>
-          <img alt="Platinum Les Exclusives luxury candle" class="also-like-img mb-5" src="https://images.unsplash.com/photo-1602872021202-70c4b9f78b46?q=80&w=640&auto=format&fit=crop"/>
-          <button class="absolute top-2 right-2 text-[11px] bg-white/90 px-2 py-1 border wishlist-btn">♡</button>
-          <button class="absolute bottom-3 left-1/2 -translate-x-1/2 text-[11px] bg-black text-white px-3 py-1 opacity-0 group-hover:opacity-100 transition quickshop-btn">QUICK SHOP</button>
-          <h4 class="text-xs tracking-[0.15em] text-center mb-2 font-light">LES EXCLUSIVES PLATINUM</h4>
-          <p class="text-sm tracking-[0.1em] text-center font-light">From €55</p>
-        </div>
-        <div class="product-card flex-shrink-0 max-w-[260px] cursor-pointer relative group" data-product='{"name":"DIFFUSER FEATHERS TOUAREG","price":130,"image":"https://images.unsplash.com/photo-1519710164239-da123dc03ef4?q=80&w=640&auto=format&fit=crop","stock":7}'>
-          <img alt="Diffuser Feathers Touareg" class="also-like-img mb-5" src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?q=80&w=640&auto=format&fit=crop"/>
-          <button class="absolute top-2 right-2 text-[11px] bg-white/90 px-2 py-1 border wishlist-btn">♡</button>
-          <button class="absolute bottom-3 left-1/2 -translate-x-1/2 text-[11px] bg-black text-white px-3 py-1 opacity-0 group-hover:opacity-100 transition quickshop-btn">QUICK SHOP</button>
-          <h4 class="text-xs tracking-[0.15em] text-center mb-2 font-light">DIFFUSER FEATHERS TOUAREG</h4>
-          <p class="text-sm tracking-[0.1em] text-center font-light">€130</p>
-        </div>
-        <div class="product-card flex-shrink-0 max-w-[260px] cursor-pointer relative group" data-product='{"name":"SCENTED CANDLE PEARLS BLACK","price":55,"image":"https://images.unsplash.com/photo-1546500840-ae38253aba9b?q=80&w=640&auto=format&fit=crop","stock":20}'>
-          <img alt="Pearls Black scented candle" class="also-like-img mb-5" src="https://images.unsplash.com/photo-1546500840-ae38253aba9b?q=80&w=640&auto=format&fit=crop"/>
-          <button class="absolute top-2 right-2 text-[11px] bg-white/90 px-2 py-1 border wishlist-btn">♡</button>
-          <button class="absolute bottom-3 left-1/2 -translate-x-1/2 text-[11px] bg-black text-white px-3 py-1 opacity-0 group-hover:opacity-100 transition quickshop-btn">QUICK SHOP</button>
-          <h4 class="text-xs tracking-[0.15em] text-center mb-2 font-light">SCENTED CANDLE PEARLS BLACK</h4>
-          <p class="text-sm tracking-[0.1em] text-center font-light">From €55</p>
-        </div>
-        <div class="product-card flex-shrink-0 max-w-[260px] cursor-pointer relative group" data-product='{"name":"SCENTED CANDLE ARABIAN NIGHTS","price":105,"image":"https://images.unsplash.com/photo-1519681393314-0a6f0ae1e82e?q=80&w=640&auto=format&fit=crop","stock":3}'>
-          <img alt="Arabian Nights scented candle" class="also-like-img mb-5" src="https://images.unsplash.com/photo-1519681393314-0a6f0ae1e82e?q=80&w=640&auto=format&fit=crop"/>
-          <button class="absolute top-2 right-2 text-[11px] bg-white/90 px-2 py-1 border wishlist-btn">♡</button>
-          <button class="absolute bottom-3 left-1/2 -translate-x-1/2 text-[11px] bg-black text-white px-3 py-1 opacity-0 group-hover:opacity-100 transition quickshop-btn">QUICK SHOP</button>
-          <h4 class="text-xs tracking-[0.15em] text-center mb-2 font-light">SCENTED CANDLE ARABIAN NIGHTS</h4>
-          <p class="text-sm tracking-[0.1em] text-center font-light">From €105</p>
-        </div>
+        <!-- Repeat for other cards -->
       </div>
+      <button class="carousel-btn" data-carousel-next aria-label="Next slide">›</button>
     </div>
   </section>
   <div class="max-w-7xl mx-auto px-6 lg:px-20 mt-6 mb-6 text-center">
@@ -504,7 +489,7 @@
     <div class="relative">
       <button aria-label="Scroll left" class="flex absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-black text-white border border-black/20 rounded-full px-4 py-3 shadow" data-carousel-prev="#inspired-list">‹</button>
       <button aria-label="Scroll right" class="flex absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-black text-white border border-black/20 rounded-full px-4 py-3 shadow" data-carousel-next="#inspired-list">›</button>
-      <div id="inspired-list" class="flex justify-center items-start space-x-8 overflow-x-auto scrollbar-hide pr-6">
+      <div id="inspired-list" class="flex justify-center items-start space-x-8 overflow-x-auto scrollbar-hide">
         <div class="product-card flex-shrink-0 max-w-[260px] cursor-pointer relative group" data-product='{"name":"ADVENT CALENDAR VOYAGE EXTRAORDINAIRE","price":490,"image":"https://images.unsplash.com/photo-1505575972943-331f2bca5ef0?q=80&w=640&auto=format&fit=crop","stock":0}'>
           <img alt="Advent Calendar Voyage Extraordinaire collection" class="inspired-img mb-5" src="https://images.unsplash.com/photo-1505575972943-331f2bca5ef0?q=80&w=640&auto=format&fit=crop"/>
           <button class="absolute top-2 right-2 text-[11px] bg-white/90 px-2 py-1 border wishlist-btn">♡</button>
@@ -555,156 +540,112 @@
     <a href="#" class="text-[11px] tracking-[0.2em] underline">SEE EVERYTHING</a>
   </div>
 
-  <!-- The Art of Gifting (Slider) -->
-  <section class="max-w-7xl mx-auto px-6 lg:px-20 mt-24 grid grid-cols-1 md:grid-cols-2 gap-12 items-center reveal">
-    <div class="bg-[#f9f6f4] p-10 max-w-md mx-auto md:mx-0">
-      <h3 class="playfair text-3xl font-normal tracking-[0.15em] mb-8">
-        THE ART OF GIFTING
-      </h3>
-      <div id="gifting-slider" class="relative">
-        <div class="overflow-hidden">
-          <div class="flex transition-transform duration-300" data-gifting-track>
-            <div class="min-w-full">
-              <img alt="Gift set with elegant packaging" class="mx-auto w-full h-auto" src="https://images.unsplash.com/photo-1470337458703-46ad1756a187?q=80&w=800&auto=format&fit=crop"/>
-              <h4 class="text-xs tracking-[0.15em] text-center mb-2 mt-6 font-light">TRIO TRAVEL CANDLES BOHEME CABARET-AFRICA</h4>
-              <p class="text-sm tracking-[0.1em] text-center font-light mb-6">€40.00</p>
-            </div>
-            <div class="min-w-full">
-              <img alt="Luxury candle gift box" class="mx-auto w-full h-auto" src="https://images.unsplash.com/photo-1600959907703-125ba1374a12?q=80&w=800&auto=format&fit=crop"/>
-              <h4 class="text-xs tracking-[0.15em] text-center mb-2 mt-6 font-light">LIMITED EDITION WINTER GIFT BOX</h4>
-              <p class="text-sm tracking-[0.1em] text-center font-light mb-6">€65.00</p>
-            </div>
-            <div class="min-w-full">
-              <img alt="Pair of candles in gift wrap" class="mx-auto w-full h-auto" src="https://images.unsplash.com/photo-1519680772-8b5e3e1b9c1a?q=80&w=800&auto=format&fit=crop"/>
-              <h4 class="text-xs tracking-[0.15em] text-center mb-2 mt-6 font-light">DUO CANDLE CELEBRATION SET</h4>
-              <p class="text-sm tracking-[0.1em] text-center font-light mb-6">€55.00</p>
+  <!-- Be Inspired -->
+  <section class="max-w-7xl mx-auto px-6 lg:px-20 mt-24 reveal">
+    <h3 class="playfair text-center text-3xl font-normal tracking-[0.15em] mb-3">
+      BE INSPIRED
+    </h3>
+    <p class="text-center text-xs tracking-[0.2em] mb-12 font-light">
+      RECOMMENDED FOR YOU  |  BEST SELLERS
+    </p>
+    <p class="text-center text-[11px] tracking-wide mb-8 opacity-80">
+      Discover curated candle picks to elevate every room — from cozy nights to festive gatherings.
+    </p>
+    <div class="relative">
+      <button aria-label="Scroll left" class="flex absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-black text-white border border-black/20 rounded-full px-4 py-3 shadow" data-carousel-prev="#inspired-list">‹</button>
+      <button aria-label="Scroll right" class="flex absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-black text-white border border-black/20 rounded-full px-4 py-3 shadow" data-carousel-next="#inspired-list">›</button>
+      <div id="inspired-list" class="flex justify-center items-start space-x-8 overflow-x-auto scrollbar-hide">
+        <div class="product-card flex-shrink-0 max-w-[260px] cursor-pointer relative group" data-product='{"name":"ADVENT CALENDAR VOYAGE EXTRAORDINAIRE","price":490,"image":"https://images.unsplash.com/photo-1505575972943-331f2bca5ef0?q=80&w=640&auto=format&fit=crop","stock":0}'>
+          <img alt="Advent Calendar Voyage Extraordinaire collection" class="inspired-img mb-5" src="https://images.unsplash.com/photo-1505575972943-331f2bca5ef0?q=80&w=640&auto=format&fit=crop"/>
+          <button class="absolute top-2 right-2 text-[11px] bg-white/90 px-2 py-1 border wishlist-btn">♡</button>
+          <span class="absolute top-2 left-2 text-[10px] bg-[#1a1918] text-white px-2 py-1">OUT OF STOCK</span>
+          <button disabled class="absolute bottom-3 left-1/2 -translate-x-1/2 text-[11px] bg-gray-400 text-white px-3 py-1 opacity-60 cursor-not-allowed quickshop-btn">QUICK SHOP</button>
+          <h4 class="text-xs tracking-[0.15em] text-center mb-2 font-light">ADVENT CALENDAR VOYAGE EXTRAORDINAIRE</h4>
+          <p class="text-sm tracking-[0.1em] text-center font-light">€490</p>
+        </div>
+        <div class="product-card flex-shrink-0 max-w-[260px] cursor-pointer relative group" data-product='{"name":"SCENTED CANDLE I LOVE SKI","price":105,"image":"https://images.unsplash.com/photo-1519682337058-a94d519337bc?q=80&w=640&auto=format&fit=crop","stock":8}'>
+          <img alt="I Love Ski scented candle winter collection" class="inspired-img mb-5" src="https://images.unsplash.com/photo-1519682337058-a94d519337bc?q=80&w=640&auto=format&fit=crop"/>
+          <button class="absolute top-2 right-2 text-[11px] bg-white/90 px-2 py-1 border wishlist-btn">♡</button>
+          <button class="absolute bottom-3 left-1/2 -translate-x-1/2 text-[11px] bg-black text-white px-3 py-1 opacity-0 group-hover:opacity-100 transition quickshop-btn">QUICK SHOP</button>
+          <h4 class="text-xs tracking-[0.15em] text-center mb-2 font-light">SCENTED CANDLE I LOVE SKI</h4>
+          <p class="text-sm tracking-[0.1em] text-center font-light">From €105</p>
+        </div>
+        <div class="product-card flex-shrink-0 max-w-[260px] cursor-pointer relative group" data-product='{"name":"SCENTED CANDLE ROSACE","price":105,"image":"https://images.unsplash.com/photo-1505575967455-40e256f73376?q=80&w=640&auto=format&fit=crop","stock":15}'>
+          <img alt="Rosace scented candle with winter notes" class="inspired-img mb-5" src="https://images.unsplash.com/photo-1505575967455-40e256f73376?q=80&w=640&auto=format&fit=crop"/>
+          <button class="absolute top-2 right-2 text-[11px] bg-white/90 px-2 py-1 border wishlist-btn">♡</button>
+          <button class="absolute bottom-3 left-1/2 -translate-x-1/2 text-[11px] bg-black text-white px-3 py-1 opacity-0 group-hover:opacity-100 transition quickshop-btn">QUICK SHOP</button>
+          <h4 class="text-xs tracking-[0.15em] text-center mb-2 font-light">SCENTED CANDLE ROSACE</h4>
+          <p class="text-sm tracking-[0.1em] text-center font-light">From €105</p>
+        </div>
+        <div class="product-card flex-shrink-0 max-w-[260px] cursor-pointer relative group" data-product='{"name":"SCENTED CANDLE LES EXCLUSIVES CYPRIUM","price":55,"image":"https://images.unsplash.com/photo-1519681391409-d69f6e0cd726?q=80&w=640&auto=format&fit=crop"}'>
+          <img alt="Les Exclusives Cyprium candle" class="inspired-img mb-5" src="https://images.unsplash.com/photo-1519681391409-d69f6e0cd726?q=80&w=640&auto=format&fit=crop"/>
+          <button class="absolute top-2 right-2 text-[11px] bg-white/90 px-2 py-1 border wishlist-btn">♡</button>
+          <button class="absolute bottom-3 left-1/2 -translate-x-1/2 text-[11px] bg-black text-white px-3 py-1 opacity-0 group-hover:opacity-100 transition quickshop-btn">QUICK SHOP</button>
+          <h4 class="text-xs tracking-[0.15em] text-center mb-2 font-light">LES EXCLUSIVES CYPRIUM</h4>
+          <p class="text-sm tracking-[0.1em] text-center font-light">From €55</p>
+        </div>
+        <div class="product-card flex-shrink-0 max-w-[260px] cursor-pointer relative group" data-product='{"name":"SCENTED CANDLE STONES MARBLE","price":105,"image":"https://images.unsplash.com/photo-1512250591270-0bea37004f66?q=80&w=640&auto=format&fit=crop"}'>
+          <img alt="Stones Marble candle" class="inspired-img mb-5" src="https://images.unsplash.com/photo-1512250591270-0bea37004f66?q=80&w=640&auto=format&fit=crop"/>
+          <button class="absolute top-2 right-2 text-[11px] bg-white/90 px-2 py-1 border wishlist-btn">♡</button>
+          <button class="absolute bottom-3 left-1/2 -translate-x-1/2 text-[11px] bg-black text-white px-3 py-1 opacity-0 group-hover:opacity-100 transition quickshop-btn">QUICK SHOP</button>
+          <h4 class="text-xs tracking-[0.15em] text-center mb-2 font-light">SCENTED CANDLE STONES MARBLE</h4>
+          <p class="text-sm tracking-[0.1em] text-center font-light">From €105</p>
+        </div>
+        <div class="product-card flex-shrink-0 max-w-[260px] cursor-pointer relative group" data-product='{"name":"SCENTED CANDLE SAND SILOLI","price":105,"image":"https://images.unsplash.com/photo-1470115636492-6d2b56f9146e?q=80&w=640&auto=format&fit=crop"}'>
+          <img alt="Sand Siloli candle" class="also-like-img mb-5" src="https://images.unsplash.com/photo-1470115636492-6d2b56f9146e?q=80&w=640&auto=format&fit=crop"/>
+          <button class="absolute top-2 right-2 text-[11px] bg-white/90 px-2 py-1 border wishlist-btn">♡</button>
+          <button class="absolute bottom-3 left-1/2 -translate-x-1/2 text-[11px] bg-black text-white px-3 py-1 opacity-0 group-hover:opacity-100 transition quickshop-btn">QUICK SHOP</button>
+          <h4 class="text-xs tracking-[0.15em] text-center mb-2 font-light">SCENTED CANDLE SAND SILOLI</h4>
+          <p class="text-sm tracking-[0.1em] text-center font-light">From €105</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="max-w-7xl mx-auto px-6 lg:px-20 mt-6 mb-6 text-center">
+    <a href="#" class="text-[11px] tracking-[0.2em] underline">SEE EVERYTHING</a>
+  </div>
+
+  <!-- Featured Collections Section -->
+  <section class="max-w-7xl mx-auto px-6 lg:px-20 mt-24 reveal">
+    <h2 class="luxury-heading text-center text-3xl mb-16">Featured Collections</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="product-card">
+        <div class="relative overflow-hidden">
+          <img src="images/collection1.jpg" alt="Signature Collection" class="w-full aspect-[4/5] object-cover">
+          <div class="absolute inset-0 bg-black/20 opacity-0 hover:opacity-100 transition-opacity">
+            <div class="absolute bottom-8 left-8">
+              <h3 class="text-white text-2xl mb-2">Signature Collection</h3>
+              <button class="text-white border-b border-white">Shop Now</button>
             </div>
           </div>
         </div>
-        <button class="absolute left-0 top-1/2 -translate-y-1/2 bg-black text-white px-3 py-2" data-gifting-prev>‹</button>
-        <button class="absolute right-0 top-1/2 -translate-y-1/2 bg-black text-white px-3 py-2" data-gifting-next>›</button>
-        <div class="flex justify-center space-x-2 mt-4" data-gifting-dots>
-          <button aria-label="Slide 1" class="w-2 h-2 rounded-full bg-black" data-gifting-dot="0"></button>
-          <button aria-label="Slide 2" class="w-2 h-2 rounded-full bg-gray-300" data-gifting-dot="1"></button>
-          <button aria-label="Slide 3" class="w-2 h-2 rounded-full bg-gray-300" data-gifting-dot="2"></button>
-        </div>
       </div>
-    </div>
-    <div class="flex justify-center items-center">
-      <img alt="Close-up of luxury candle gift set" class="w-full h-auto max-w-lg" src="https://images.unsplash.com/photo-1516382799247-87df95d79a2d?q=80&w=1000&auto=format&fit=crop"/>
+      <!-- Repeat for other collections -->
     </div>
   </section>
 
-  <!-- Categories -->
-  <section class="max-w-7xl mx-auto px-6 lg:px-20 mt-24 grid grid-cols-2 lg:grid-cols-4 gap-6 reveal">
-    <div class="category-item cursor-pointer">
-      <img alt="Scented candles collection" class="w-full h-auto object-cover category-item-img" src="https://images.unsplash.com/photo-1504196606672-aef5c9cefc92?q=80&w=800&auto=format&fit=crop"/>
-      <div class="category-overlay">
-        <h4 class="text-white text-base tracking-[0.2em] font-light">SCENTED CANDLES</h4>
-      </div>
-    </div>
-    <div class="category-item cursor-pointer">
-      <img alt="Home fragrances collection" class="w-full h-auto object-cover category-item-img" src="https://images.unsplash.com/photo-1556228578-8fbf49d8dd3b?q=80&w=800&auto=format&fit=crop"/>
-      <div class="category-overlay">
-        <h4 class="text-white text-base tracking-[0.2em] font-light">HOME FRAGRANCES</h4>
-      </div>
-    </div>
-    <div class="category-item cursor-pointer">
-      <img alt="Luxury gift items" class="w-full h-auto object-cover category-item-img" src="https://images.unsplash.com/photo-1519681393107-4f0b0cded6a5?q=80&w=800&auto=format&fit=crop"/>
-      <div class="category-overlay">
-        <h4 class="text-white text-base tracking-[0.2em] font-light">GIFTS</h4>
-      </div>
-    </div>
-    <div class="category-item cursor-pointer">
-      <img alt="Body wellness products" class="w-full h-auto object-cover category-item-img" src="https://images.unsplash.com/photo-1512207736890-6ffed8a84e8a?q=80&w=800&auto=format&fit=crop"/>
-      <div class="category-overlay">
-        <h4 class="text-white text-base tracking-[0.2em] font-light">BODY WELLNESS</h4>
-      </div>
+  <!-- Newsletter Section with Enhanced Styling -->
+  <section class="bg-luxury-cream py-24 mt-24 reveal">
+    <div class="max-w-2xl mx-auto text-center px-6">
+      <h2 class="luxury-heading text-3xl mb-6">Join Our Newsletter</h2>
+      <p class="mb-8 text-luxury-charcoal/80">Subscribe to receive updates, access to exclusive deals, and more.</p>
+      <form class="flex flex-col md:flex-row gap-4 justify-center">
+        <input type="email" placeholder="Enter your email" class="px-6 py-3 border border-luxury-charcoal/20 bg-transparent focus:border-luxury-gold transition-all duration-300">
+        <button class="btn-primary hover:scale-105 transition-transform duration-300">Subscribe</button>
+      </form>
     </div>
   </section>
 
-  <!-- Hand of Craftsman -->
-  <section class="max-w-7xl mx-auto px-6 lg:px-20 mt-24 grid grid-cols-1 md:grid-cols-2 gap-12 bg-[#f9f6f4] py-16 items-center reveal">
-    <div class="flex flex-col justify-center max-w-xl mx-auto md:mx-0 px-8">
-      <h3 class="playfair text-3xl font-normal tracking-[0.15em] mb-6">
-        HAND OF CRAFTSMAN
-      </h3>
-      <p class="text-sm font-light leading-relaxed mb-6">
-        At the heart of the object, there is the breath and the hand of the craftsman. The one who blows the glass and leaves in each piece a complement of soul, the one who delicately pours the wax layer by layer. The magic happens as soon as the object catches fire.
-      </p>
-      <button class="border-2 border-black text-black text-xs tracking-[0.2em] px-8 py-3 w-max font-light hover:bg-black hover:text-white transition-all">
-        READ MORE
-      </button>
-    </div>
-    <div class="flex justify-center items-center">
-      <img alt="Craftsman creating luxury candles" class="crafts-img max-w-lg" src="https://images.unsplash.com/photo-1532634896-26909d0d4b6a?q=80&w=1000&auto=format&fit=crop"/>
-    </div>
-  </section>
-
-  <!-- Our Stories -->
-  <section class="max-w-7xl mx-auto px-6 lg:px-20 mt-24 grid grid-cols-1 md:grid-cols-2 gap-12 bg-[#f9f6f4] py-16 items-center reveal">
-    <div class="flex justify-center items-center">
-      <img alt=" wickitcandles boutique storefront" class="stories-img max-w-lg" src="https://images.unsplash.com/photo-1507133750040-4a8f57021586?q=80&w=1000&auto=format&fit=crop"/>
-    </div>
-    <div class="flex flex-col justify-center max-w-xl mx-auto md:mx-0 px-8">
-      <h3 class="playfair text-3xl font-normal tracking-[0.15em] mb-6">
-        OUR STORIES
-      </h3>
-      <p class="text-sm font-light leading-relaxed mb-4">
-        With the customer experience at the heart of our concerns, we are developing our network of shops to reach our loyal community.
-      </p>
-      <p class="text-sm font-light leading-relaxed mb-4">
-        True places of discovery and dreams, dive into the heart of our know-how and expertise thanks to our unique universe.
-      </p>
-      <p class="text-sm font-light leading-relaxed mb-6">
-        Treat yourself to a cultural and olfactory journey. Discover our mythical fragrances and our new collections.
-      </p>
-      <button class="border-2 border-black text-black text-xs tracking-[0.2em] px-8 py-3 w-max font-light hover:bg-black hover:text-white transition-all">
-        DISCOVER OUR STORES
-      </button>
-    </div>
-  </section>
-
-  <!-- News Section -->
-  <section class="bg-[#1a1918] py-16 mt-24 reveal">
-    <div class="max-w-7xl mx-auto px-6 lg:px-20">
-      <h3 class="playfair text-white text-3xl font-normal tracking-[0.15em] mb-12 text-center">
-        NEWS
-      </h3>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
-        <article class="cursor-pointer group">
-          <img alt="Festive tables by Serge Anton" class="w-full h-auto object-cover mb-5 group-hover:opacity-90 transition-opacity news-img" src="https://images.unsplash.com/photo-1519681392959-3b8f7a72c8d3?q=80&w=600&auto=format&fit=crop"/>
-          <h4 class="playfair text-white text-base font-normal tracking-[0.15em] mb-2">
-            FESTIVE TABLES BY SERGE ANTON
-          </h4>
-          <p class="text-white text-xs tracking-[0.15em] font-light hover:opacity-70 transition-opacity">
-            Read more
-          </p>
-        </article>
-        <article class="cursor-pointer group">
-          <img alt="Pink October campaign" class="w-full h-auto object-cover mb-5 group-hover:opacity-90 transition-opacity news-img" src="https://images.unsplash.com/photo-1508171997653-86ae4e1816ec?q=80&w=600&auto=format&fit=crop"/>
-          <h4 class="playfair text-white text-base font-normal tracking-[0.15em] mb-2">
-            PINK OCTOBER: THE STORY OF THE WOMEN...
-          </h4>
-          <p class="text-white text-xs tracking-[0.15em] font-light hover:opacity-70 transition-opacity">
-            Read more
-          </p>
-        </article>
-        <article class="cursor-pointer group">
-          <img alt="Orientalist collection by Serge Anton" class="w-full h-auto object-cover mb-5 group-hover:opacity-90 transition-opacity news-img" src="https://images.unsplash.com/photo-1556228578-8fbf49d8dd3b?q=80&w=600&auto=format&fit=crop"/>
-          <h4 class="playfair text-white text-base font-normal tracking-[0.15em] mb-2">
-            ORIENTALIST BY SERGE ANTON
-          </h4>
-          <p class="text-white text-xs tracking-[0.15em] font-light hover:opacity-70 transition-opacity">
-            Read more
-          </p>
-        </article>
+  <!-- Testimonials Section with Enhanced Layout -->
+  <section class="max-w-7xl mx-auto px-6 lg:px-20 py-24 reveal">
+    <h2 class="luxury-heading text-center text-3xl mb-16">What Our Clients Say</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+      <div class="text-center hover:scale-105 transition-transform duration-300">
+        <div class="text-luxury-gold text-4xl mb-6">"</div>
+        <p class="mb-6 italic text-luxury-charcoal/80">Absolutely stunning candles. The scents are divine and the packaging is exquisite.</p>
+        <p class="text-sm text-luxury-charcoal/60">- Sarah M.</p>
       </div>
-      <div class="flex justify-center">
-        <button class="border-2 border-white text-white text-xs tracking-[0.2em] px-8 py-3 font-light hover:bg-white hover:text-black transition-all">
-          VIEW ALL
-        </button>
-      </div>
+      <!-- Add two more testimonials -->
     </div>
   </section>
 
